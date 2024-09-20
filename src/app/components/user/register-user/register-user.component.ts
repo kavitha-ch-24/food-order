@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -20,7 +20,7 @@ export class RegisterUserComponent {
   dataVerify: boolean = false;
   confirmPassword: any;
 
-  constructor(private messageService: MessageService, private userServ: UserService, private primengConfig: PrimeNGConfig) {
+  constructor(private messageService: MessageService, private userServ: UserService, private primengConfig: PrimeNGConfig, private router: Router) {
     this.registerForm = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -36,7 +36,7 @@ export class RegisterUserComponent {
     return this.registerForm.controls;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.primengConfig.ripple = true;
   }
 
@@ -49,8 +49,9 @@ export class RegisterUserComponent {
         this.userServ.createUser(this.registerForm.value).subscribe({
           next: (res: any) => {
             console.log(res);
-            if (res.success === 200) {
+            if (res.status === 200) {
               this.messageService.add({ severity: 'success', summary: 'Account Created', detail: res.msg });
+              this.router.navigate(['/login'])
             } else {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: res.error });
             }
