@@ -3,11 +3,12 @@ import { FormsModule, FormControl, FormGroup, Validators, ReactiveFormsModule } 
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../_services/user.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [RouterModule, FormsModule, ReactiveFormsModule, ToastModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [MessageService]
@@ -38,9 +39,11 @@ export class LoginComponent {
           if (res.status === 200) {
             localStorage.setItem('userData', JSON.stringify(res));
             this.messageService.add({ severity: 'success', summary: 'Login Success', detail: res.msg });
-            this.router.navigate(['/user-list'])
+            setTimeout(() => {
+              this.router.navigate(['/user-list']);
+            }, 2000);
           } else{
-            this.messageService.add({ severity: 'error', summary: 'Please try again later', detail: res.err });
+            this.messageService.add({ severity: 'error', summary: 'Please try again later', detail: res.error });
           }
         }, error: (err: any) => {
           console.log(err);
