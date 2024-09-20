@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
-    importProvidersFrom(FormsModule, ToastModule, BrowserAnimationsModule),
+    importProvidersFrom(FormsModule, ToastModule, BrowserAnimationsModule, MessageService),
     provideHttpClient(withFetch())
   ]
 };

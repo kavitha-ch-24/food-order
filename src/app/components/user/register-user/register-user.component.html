@@ -89,6 +89,26 @@
                                     Date of Birth is required</div>
                         </div>
                     </div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 me-10">
+                                Age <span class="error">*</span>
+                            </label>
+                            <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your age" formControlName="age"> 
+                            <div class="error" *ngIf="dataVerify && registerForm.get('age')?.hasError('required')">
+                                Age is required</div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900">
+                                Phone Number <span class="error">*</span>
+                            </label>
+                            <input
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                id="phone" type="number" formControlName="phone_number">
+                                <div class="error" *ngIf="dataVerify && registerForm.get('phone_number')?.hasError('required')">
+                                    Phone number is required</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center">
                     <button

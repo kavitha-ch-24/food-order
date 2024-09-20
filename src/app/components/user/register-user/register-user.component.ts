@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../../_services/user.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register-user',
@@ -19,18 +20,24 @@ export class RegisterUserComponent {
   dataVerify: boolean = false;
   confirmPassword: any;
 
-  constructor(private messageService: MessageService, private userServ: UserService) {
+  constructor(private messageService: MessageService, private userServ: UserService, private primengConfig: PrimeNGConfig) {
     this.registerForm = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]),
       gender: new FormControl('', Validators.required),
-      dob: new FormControl('', Validators.required)
+      dob: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      phone_number: new FormControl('', Validators.required),
     })
   }
 
   get myfc() {
     return this.registerForm.controls;
+  }
+
+  ngOnInit(){
+    this.primengConfig.ripple = true;
   }
 
   createAccount() {
@@ -42,6 +49,11 @@ export class RegisterUserComponent {
         this.userServ.createUser(this.registerForm.value).subscribe({
           next: (res: any) => {
             console.log(res);
+            if (res.success === 200) {
+              this.messageService.add({ severity: 'success', summary: 'Account Created', detail: res.msg });
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: res.error });
+            }
           }, error: (err: any) => {
             console.log(err);
           }
@@ -49,8 +61,6 @@ export class RegisterUserComponent {
       } else {
         this.messageService.add({ severity: 'error', summary: 'Password Error', detail: 'Passwords do not match' });
       }
-    } else {
-      alert('Invalid form');
     }
   }
 }

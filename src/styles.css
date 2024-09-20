@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body ::ng-deep .ui-toast .ui-toast-message.ui-toast-message-error {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+body ::ng-deep .ui-toast .ui-toast-message.ui-toast-message-success {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+}
