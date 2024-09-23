@@ -1,1 +1,38 @@
-<router-outlet></router-outlet>
+<!-- <app-navbar *ngIf="showMenu"></app-navbar>
+
+@if (showMenu){
+<div class="mt-16 hidden h-screen stic md:flex col-span-1 lg:flex bg-gray-100">
+    <app-sidebar></app-sidebar>
+</div>
+<div class="col-span-5 bg-gray-100">
+    <router-outlet></router-outlet>
+</div>
+} @else {
+<div class="w-full">
+    <router-outlet></router-outlet>
+</div>
+}
+
+@if(showMenu){
+<footer class="bg-gray-200 text-center py-4 mt-auto">
+    Ticketing Management System ©2024 Implement By ittstar.com
+</footer>
+} -->
+
+<div *ngIf="!showMenu">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="showMenu">
+    <div class="fixed w-full">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="grid grid-cols-5 top-16">
+        <div class="col-span-1 top-16">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-span-4 mt-16 top-16">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -40,7 +40,7 @@ export class LoginComponent {
             localStorage.setItem('userData', JSON.stringify(res));
             this.messageService.add({ severity: 'success', summary: 'Login Success', detail: res.msg });
             setTimeout(() => {
-              this.router.navigate(['/user-list']);
+              this.router.navigate(['/dashboard']);
             }, 2000);
           } else{
             this.messageService.add({ severity: 'error', summary: 'Please try again later', detail: res.error });
