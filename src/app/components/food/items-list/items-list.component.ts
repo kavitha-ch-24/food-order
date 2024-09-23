@@ -17,7 +17,7 @@ export class ItemsListComponent {
   ngOnInit(): void {
     this.ar.url.subscribe((params) => {
       if (params[0].path === 'food') {
-        console.log(params);
+        // console.log(params);
         this.itemClick = true;
         this.dataServ.setItemClick(this.itemClick);
       }
