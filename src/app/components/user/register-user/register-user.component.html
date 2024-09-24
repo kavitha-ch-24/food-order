@@ -13,7 +13,7 @@
                                 Full Name <span class="error">*</span>
                             </label>
                             <input placeholder="Name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 id="username" type="text" formControlName="name">
                             <div class="error" *ngIf="dataVerify && registerForm.get('name')?.hasError('required')">User
                                 Name is
@@ -23,8 +23,8 @@
                             <label class="block mb-2 text-sm font-medium text-gray-900">
                                 Email Address <span class="error">*</span>
                             </label>
-                            <input placeholder="Name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            <input placeholder="Email Address"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 id="email" type="text" formControlName="email">
                             <div class="error" *ngIf="dataVerify && registerForm.get('email')?.hasError('required')">
                                 Email is required
@@ -41,7 +41,7 @@
                                 Password <span class="error">*</span>
                             </label>
                             <input
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 placeholder="••••••••" id="password" type="password" formControlName="password">
                             <div class="error" *ngIf="dataVerify && registerForm.get('password')?.hasError('required')">
                                 Password is required</div>
@@ -57,7 +57,7 @@
                                 Confirm password <span class="error">*</span>
                             </label>
                             <input
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 placeholder="••••••••" id="confirmPassword" type="password"
                                 [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}">
                         </div>
@@ -68,7 +68,7 @@
                                 Gender <span class="error">*</span>
                             </label>
                             <select name="gender" id="gender"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 formControlName="gender">
                                 <option value="" hidden>Select Your Gender</option>
                                 <option value="male">Male</option>
@@ -83,7 +83,7 @@
                                 Date of Birth <span class="error">*</span>
                             </label>
                             <input
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 id="dob" type="date" formControlName="dob">
                                 <div class="error" *ngIf="dataVerify && registerForm.get('dob')?.hasError('required')">
                                     Date of Birth is required</div>
@@ -94,7 +94,7 @@
                             <label class="block mb-2 text-sm font-medium text-gray-900 me-10">
                                 Age <span class="error">*</span>
                             </label>
-                            <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your age" formControlName="age"> 
+                            <input type="number" class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your age" formControlName="age"> 
                             <div class="error" *ngIf="dataVerify && registerForm.get('age')?.hasError('required')">
                                 Age is required</div>
                         </div>
@@ -103,7 +103,7 @@
                                 Phone Number <span class="error">*</span>
                             </label>
                             <input
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                                 id="phone" type="number" formControlName="phone_number">
                                 <div class="error" *ngIf="dataVerify && registerForm.get('phone_number')?.hasError('required')">
                                     Phone number is required</div>

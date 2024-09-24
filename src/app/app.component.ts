@@ -21,7 +21,6 @@ export class AppComponent {
         let sideMenu = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/register');
         this.showMenu = !sideMenu;
         // console.log(this.showMenu);
-        
       }
     })
   }

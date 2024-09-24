@@ -5,12 +5,14 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ItemsListComponent } from './components/food/items-list/items-list.component';
 import { CreateItemComponent } from './components/food/create-item/create-item.component';
+import { UserDescComponent } from './components/user/user-desc/user-desc.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'register', component: RegisterUserComponent },
-    { path: 'user-list', component: UserListComponent },
+    { path: 'user/register', component: RegisterUserComponent },
+    { path: 'user/list', component: UserListComponent },
+    { path: 'user/desc', component: UserDescComponent },
     { path: 'food/list', component: ItemsListComponent },
     { path: 'food/create', component: CreateItemComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },

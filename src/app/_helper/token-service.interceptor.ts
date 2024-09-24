@@ -10,6 +10,7 @@ export const tokenServiceInterceptor: HttpInterceptorFn = (req, next) => {
       try {
         const userDataInfo = JSON.parse(authToken);
         token = userDataInfo?.data.token || '';
+        // console.log(token); 
       } catch (e) {
         console.error('Error parsing userData from localStorage', e);
       }
@@ -17,6 +18,7 @@ export const tokenServiceInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (token) {
+    // console.log(token, "api token");
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${token}` }
     });
