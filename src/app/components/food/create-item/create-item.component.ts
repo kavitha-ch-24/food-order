@@ -43,8 +43,6 @@ export class CreateItemComponent {
         this.dataServ.setItemClick(this.itemClick);
       }
     })
-    // this.dataServ.getUserInfo();
-    // console.log(this.dataServ.getUserInfo().data);
     this.userData = this.dataServ.getUserInfo()?.data;
   }
 

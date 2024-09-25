@@ -14,6 +14,8 @@ export class SidebarComponent {
   dashboard: boolean = false;
   item: boolean = false;
   itemClick: boolean = false;
+  profile: boolean = false;
+  value: string = '';
 
   constructor(private dataServ: DataServiceService) { }
 
@@ -25,9 +27,19 @@ export class SidebarComponent {
 
   dashboardAccess() {
     this.dashboard = !this.dashboard;
+    this.value = 'dashboard';
+    console.log(this.itemClick, this.value, "dash");
   }
 
   menuItems() {
     this.item = !this.item;
+    this.value = "menu";
+    console.log(this.itemClick, this.value, "menu");
+  }
+
+  profileAccess() {
+    this.profile = !this.profile;
+    this.value = "profile";
+    console.log(this.itemClick, this.value, "profile");
   }
 }

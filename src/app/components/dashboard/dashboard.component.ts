@@ -16,10 +16,10 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.ar.url.subscribe((params) => {
-      if (!params[1]) {
+      if (params[0].path === 'dashboard') {
         this.dataServ.setItemClick(this.itemClick);
       }
-    })
+    });
   }
 
 }

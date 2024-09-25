@@ -1,8 +1,8 @@
 <div
-    class="flex h-screen fixed top-20 w-[260px] flex-col bg-white bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5">
+    class="flex h-screen fixed top-20 pt-5 w-[260px] flex-col bg-gray-100 bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5">
     <div class="mb-2">
         <div class="flex justify-between" (click)="dashboardAccess()">
-            <div class="cursor-pointer px-3 pt-3" [ngClass]="itemClick ? '' :'divActive'"><i
+            <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'dashboard') ? 'divActive' : ''"><i
                     class="fa-solid fa-gauge me-2"></i>Dashboard Access
             </div>
             <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
@@ -13,8 +13,8 @@
         </ul>
     </div>
     <div class="mb-2">
-        <div class="flex justify-between" (click)="menuItems()" >
-            <div class="cursor-pointer px-3 pt-3" [ngClass]="itemClick ?'divActive' : ''">
+        <div class="flex justify-between" (click)="menuItems()">
+            <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'menu')  ? 'divActive' : ''">
                 <i class="fa-solid fa-utensils me-2"></i>Menu Items
             </div>
             <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
@@ -26,4 +26,15 @@
                     class="fa-solid fa-turn-up me-2 rotate-90"></i>Create Item</li>
         </ul>
     </div>
+
+    <div class="flex justify-between" (click)="profileAccess()">
+        <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'profile') ? 'divActive' : ''"><i
+                class="fa-solid fa-user me-2"></i>Manage Profile
+        </div>
+        <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
+    </div>
+    <ul *ngIf="profile">
+        <li class="ps-10 py-2 cursor-pointer mt-2" routerLink="/user/desc" routerLinkActive="active"><i
+                class="fa-solid fa-turn-up rotate-90 me-2"></i>My Profile</li>
+    </ul>
 </div>
