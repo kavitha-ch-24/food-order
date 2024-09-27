@@ -1,7 +1,7 @@
-<div *ngIf="foodLists" class="pe-10 mx-auto w-[1200px]">
-    <div class="grid grid-cols-3 gap-5 mb-28">
+<div *ngIf="foodLists" class="xl:w-[1200px] px-10 mx-auto lg:w-[900px] md:w-full sm:w-full xs:w-full">
+    <div class="grid gap-5 mb-28 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
         <div *ngFor="let item of foodLists; let i = index"
-            class="border border-slate-300 shadow-md h-full my-10 text-center relative bg-gray-50">
+            class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
             <div>
                 <img src={{item.image_url}} class="mx-auto w-96 h-56 bg-center bg-cover">
                 <h1 class="m-2 font-bold text-lg text-gray-700">{{item.itemName | titlecase}}</h1>

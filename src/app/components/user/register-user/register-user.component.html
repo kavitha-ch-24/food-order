@@ -1,13 +1,12 @@
-<div class="flex items-center justify-center my-20">
-    <form [formGroup]="registerForm" (ngSubmit)="createAccount()">
-        <div class="px-6 py-8 w-[700px] mx-auto lg:py-0">
+<div class="flex items-center justify-center h-[100vh] ">
+    <form [formGroup]="registerForm" (ngSubmit)="createAccount()">    
             <div class="w-full bg-white rounded-lg shadow border">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <p
                         class="text-xl text-center pb-3 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Create an account
                     </p>
-                    <div class="grid grid-cols-2 gap-5">
+                    <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">
                                 Full Name <span class="error">*</span>
@@ -35,7 +34,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-5">
+                    <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">
                                 Password <span class="error">*</span>
@@ -62,7 +61,7 @@
                                 [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-5">
+                    <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 me-10">
                                 Gender <span class="error">*</span>
@@ -89,7 +88,7 @@
                                     Date of Birth is required</div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-5">
+                    <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 me-10">
                                 Age <span class="error">*</span>
@@ -123,7 +122,6 @@
                     </p>
                 </div>
             </div>
-        </div>
     </form>
 </div>
 <p-toast></p-toast>

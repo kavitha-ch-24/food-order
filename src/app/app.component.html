@@ -24,20 +24,16 @@
 </div>
 
 <div *ngIf="showMenu">
-    <div class="fixed w-full top-0 left-0 z-50" >
+    <div class="fixed w-full top-0 left-0 z-50">
         <app-navbar></app-navbar>
     </div>
-    <div class="grid grid-cols-5 top-20">
-        <div class="col-span-1">
+    <div class="grid top-20 lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-1 xs:grid-cols-1">
+        <div class=" lg:block md:block hidden z-50 lg:col-span-1 md:col-span-1">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="col-span-4 my-24">
+        <div class="lg:col-span-4 md:col-span-4 sm:grid-cols-1 xs:grid-cols-1 my-24">
             <router-outlet></router-outlet>
-            <div class="flex justify-center w-full">
-                <footer class="fixed bottom-0 h-fit text-center w-[1302px] bg-gray-200 py-4 mt-auto">
-                    Food Ordering Site &copy;2024 Implement By ittstar.com
-                </footer>
-            </div>
+            <!-- <footer class=" bg-gray-200 text-center py-4">Food Ordering Site &copy;2024 Implement By ittstar.com</footer> -->
         </div>
     </div>
 </div>

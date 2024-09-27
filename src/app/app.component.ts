@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        let sideMenu = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/register');
+        let sideMenu = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/user/register');
         this.showMenu = !sideMenu;
         // console.log(this.showMenu);
       }
