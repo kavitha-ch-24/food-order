@@ -5,7 +5,6 @@ export const tokenServiceInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (typeof localStorage !== 'undefined') {
     const authToken = localStorage.getItem('userData');
-
     if (authToken) {
       try {
         const userDataInfo = JSON.parse(authToken);
