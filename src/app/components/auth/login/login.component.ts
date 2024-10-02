@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../_services/user.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AuthService } from '../../../_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ import { ToastModule } from 'primeng/toast';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private userServ: UserService, private primengConfig: PrimeNGConfig, private messageService: MessageService, private router: Router) {
+  constructor(private userServ: UserService, private primengConfig: PrimeNGConfig, private messageService: MessageService, private router: Router, private authServ: AuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -39,6 +40,7 @@ export class LoginComponent {
           if (res.status === 200) {
             localStorage.setItem('userData', JSON.stringify(res));
             this.messageService.add({ severity: 'success', summary: 'Login Success', detail: res.msg });
+            this.authServ.login();
             setTimeout(() => {
               this.router.navigate(['/dashboard']);
             }, 2000);
