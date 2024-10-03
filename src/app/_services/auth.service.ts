@@ -11,12 +11,30 @@ export class AuthService {
     return this.loggedIn.value;
   }
 
+  // private isLoggedIn(): boolean {
+  //   if (localStorage !== undefined) {
+  //     return localStorage.getItem('isLoggedIn') === 'true';
+  //   }
+  //   return false;
+  // }
+
   private isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    try {
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        return localStorage.getItem('isLoggedIn') === 'true';
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
+    return false; 
   }
 
   login() {
-    localStorage.setItem('isLoggedIn', 'true');
+    try {
+      localStorage.setItem('isLoggedIn', 'true');
+    } catch (error) {
+      console.error(error);
+    }
     this.loggedIn.next(true);
   }
 
