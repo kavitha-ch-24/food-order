@@ -1,40 +1,60 @@
 <div
-    class="flex h-[100%] fixed top-20 pt-5 flex-col bg-gray-100 bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5 xl:w-[280px] lg:w-[250px] md:w-[200px]">
-    <div class="mb-2">
-        <div class="flex justify-between" (click)="dashboardAccess()">
-            <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'dashboard') ? 'divActive' : ''"><i
-                    class="fa-solid fa-gauge me-2"></i>Dashboard Access
-            </div>
-            <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
-        </div>
-        <ul *ngIf="dashboard">
-            <li class="ps-10 py-2 cursor-pointer mt-2" routerLink="/dashboard" routerLinkActive="active"><i
-                    class="fa-solid fa-turn-up me-2 rotate-90"></i>Dashboard</li>
-        </ul>
-    </div>
-    <div class="mb-2">
-        <div class="flex justify-between" (click)="menuItems()">
-            <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'menu')  ? 'divActive' : ''">
-                <i class="fa-solid fa-utensils me-2"></i>Menu Items
-            </div>
-            <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
-        </div>
-        <ul *ngIf="item">
-            <li class="ps-10 py-2 cursor-pointer mt-2" routerLink="/food/list" routerLinkActive="active"><i
-                    class="fa-solid fa-turn-up me-2 rotate-90"></i>Items List</li>
-            <li class="ps-10 py-2 cursor-pointer" routerLink="/food/create" routerLinkActive="active"><i
-                    class="fa-solid fa-turn-up me-2 rotate-90"></i>Create Item</li>
-        </ul>
-    </div>
+    class="flex h-[100%] fixed top-20 flex-col bg-gray-100 bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5 xl:w-[280px] lg:w-[250px] md:w-[200px]">
+    <ul class="flex flex-col mt-4 cursor-pointer">
+        <li class="pt-0.5">
+            <a class="flex items-center justify-between py-2 px-6"
+                [ngClass]="{'text-blue-700': activeMenu === 1}" (click)="setActiveMenu(1)">
+                Dashboard
+                <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 1}">
+                    &#9660;
+                </span>
+            </a>
+            <ul class="pl-6" *ngIf="activeMenu === 1">
+                <li>
+                    <a routerLink="/dashboard" class="block py-2 px-4"
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 1}"
+                        (click)="setActiveSubmenu(1)">Dashboard</a>
+                </li>
+            </ul>
+        </li>
 
-    <div class="flex justify-between" (click)="profileAccess()">
-        <div class="cursor-pointer px-3 pt-3" [ngClass]="(itemClick && value === 'profile') ? 'divActive' : ''"><i
-                class="fa-solid fa-user me-2"></i>Manage Profile
-        </div>
-        <i class="fa-solid fa-angle-down ms-2 pt-3 flex items-center cursor-pointer px-3"></i>
-    </div>
-    <ul *ngIf="profile">
-        <li class="ps-10 py-2 cursor-pointer mt-2" routerLink="/user/desc" routerLinkActive="active"><i
-                class="fa-solid fa-turn-up rotate-90 me-2"></i>My Profile</li>
+        <li class="pt-0.5">
+            <a class="flex items-center justify-between py-2 px-6" [ngClass]="{'text-blue-700': activeMenu === 2}"
+                (click)="setActiveMenu(2)">
+                Items
+                <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 2}">
+                    &#9660;
+                </span>
+            </a>
+            <ul class="pl-6" *ngIf="activeMenu === 2">
+                <li>
+                    <a routerLink="/food/list" class="block py-2 px-4"
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 4}" (click)="setActiveSubmenu(4)">Items
+                        List</a>
+                </li>
+                <li>
+                    <a routerLink="/food/create" class="block py-2 px-4"
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 5}" (click)="setActiveSubmenu(5)">Create
+                        Item</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="py-0.5">
+            <a class="flex items-center justify-between py-2 px-6" [ngClass]="{'text-blue-700': activeMenu === 3}"
+                (click)="setActiveMenu(3)">
+                My Profile
+                <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 3}">
+                    &#9660;
+                </span>
+            </a>
+            <ul class="pl-6" *ngIf="activeMenu === 3">
+                <li>
+                    <a routerLink="/user/desc" class="block py-2 px-4"
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 7}" (click)="setActiveSubmenu(7)">My
+                        Profile</a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </div>

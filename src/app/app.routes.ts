@@ -9,13 +9,20 @@ import { UserDescComponent } from './components/user/user-desc/user-desc.compone
 import { AuthGuardService } from './_services/auth-guard.service';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'user/register', component: RegisterUserComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuardService] },
-    { path: 'user/list', component: UserListComponent, canActivate:[AuthGuardService] },
-    { path: 'user/desc', component: UserDescComponent, canActivate:[AuthGuardService] },
-    { path: 'food/list', component: ItemsListComponent, canActivate:[AuthGuardService] },
-    { path: 'food/create', component: CreateItemComponent, canActivate:[AuthGuardService] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent }, 
+  { path: 'user/register', component: RegisterUserComponent }, 
+  {
+    path: '',
+    canActivate: [AuthGuardService],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'user/list', component: UserListComponent },
+      { path: 'user/desc', component: UserDescComponent },
+      { path: 'food/list', component: ItemsListComponent },
+      { path: 'food/create', component: CreateItemComponent },
+    ]
+  },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
+

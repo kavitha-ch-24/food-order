@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class DataServiceService {
   private userDataSubject = new BehaviorSubject<any>(null);
   userData$ = this.userDataSubject.asObservable();
 
-  constructor() { }
+  constructor(private authServ: AuthService, private router: Router) { }
 
   private itemClickSubject = new BehaviorSubject<boolean>(false);
   itemClick$ = this.itemClickSubject.asObservable();
@@ -36,7 +38,7 @@ export class DataServiceService {
   }
 
   clearUserInfo() {
-    localStorage.removeItem("userData");
-    this.userDataSubject.next(null);
+    this.authServ.logout();
+    this.router.navigate(['/login']);
   }
 }

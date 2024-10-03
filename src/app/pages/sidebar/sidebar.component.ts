@@ -42,4 +42,22 @@ export class SidebarComponent {
     this.value = "profile";
     console.log(this.itemClick, this.value, "profile");
   }
+
+
+  activeMenu: number | null = null;
+  activeSubmenu: number | null = null;
+
+  setActiveMenu(menuIndex: number) {
+    if (this.activeMenu === menuIndex) {
+      this.activeMenu = null; // Close menu if already active
+    } else {
+      this.activeMenu = menuIndex;
+      this.activeSubmenu = null; // Reset submenu when changing menu
+    }
+  }
+
+  setActiveSubmenu(submenuIndex: number) {
+    this.activeSubmenu = submenuIndex;
+  }
+  
 }
