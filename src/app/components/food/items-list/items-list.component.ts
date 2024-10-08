@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DataServiceService } from '../../../_services/data-service.service';
 import { FoodService } from '../../../_services/food.service';
 import { ToastModule } from 'primeng/toast';
@@ -9,14 +9,14 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-items-list',
   standalone: true,
-  imports: [ToastModule, CommonModule],
+  imports: [ToastModule, CommonModule, RouterModule],
   templateUrl: './items-list.component.html',
   styleUrl: './items-list.component.css',
   providers: [MessageService]
 })
 export class ItemsListComponent {
   itemClick: boolean = false;
-  foodLists:any [] = [];
+  foodLists: any[] = [];
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService) { }
 
@@ -45,5 +45,9 @@ export class ItemsListComponent {
         }
       }
     })
+  }
+
+  getItemId(data:any){
+    console.log(data);
   }
 }

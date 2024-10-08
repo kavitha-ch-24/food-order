@@ -49,10 +49,10 @@ export class SidebarComponent {
 
   setActiveMenu(menuIndex: number) {
     if (this.activeMenu === menuIndex) {
-      this.activeMenu = null; // Close menu if already active
+      this.activeMenu = null; 
     } else {
       this.activeMenu = menuIndex;
-      this.activeSubmenu = null; // Reset submenu when changing menu
+      this.activeSubmenu = null; 
     }
   }
 

@@ -1,0 +1,94 @@
+<div class="my-5 px-10 mx-auto xl:w-[1200px] lg:w-[800px] md:w-[580px] sm:w-full xs:w-full">
+    <h3 class="font-bold text-xl mb-3">Item Update Form</h3>
+    <form [formGroup]="updateItemForm" (ngSubmit)="updateItem()"
+        class="border border-slate-300 p-5 rounded shadow-md bg-gray-100">
+        <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Name <span class="error">*</span>
+                </label>
+                <input placeholder="Item Name"
+                    class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5"
+                    id="username" type="text" formControlName="itemName">
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('itemName')?.hasError('required')">Item
+                    Name is
+                    required</div>
+            </div>
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Description <span class="error">*</span>
+                </label>
+                <textarea
+                    class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5"
+                    name="desc" id="desc" placeholder="Item Description" cols="180" rows="1"
+                    formControlName="description"></textarea>
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('description')?.hasError('required')">
+                    Item description is required
+                </div>
+            </div>
+        </div>
+        <div class="mb-5 grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Price <span class="error">*</span>
+                </label>
+                <input placeholder="Item Price"
+                    class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5"
+                    id="price" type="text" formControlName="price">
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('price')?.hasError('required')">User
+                    Price is
+                    required</div>
+            </div>
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Image <span class="error">*</span>
+                </label>
+                <input type="file" (change)="fileUpload($event)" accept=".png, .jpg, .jpeg"
+                    class="w-full bg-gray-50 mt-2 border border-gray-300 text-gray-500 font-medium text-sm file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" />
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('image_url')?.hasError('required')">
+                    Image Url is required
+                </div>
+            </div>
+        </div>
+        <div class="mb-5 grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Food Type <span class="error">*</span>
+                </label>
+                <select name="type" id="type" formControlName="food_type"
+                    class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5">
+                    <option value="" selected hidden>Select Food Type</option>
+                    <option value="veg">Veg</option>
+                    <option value="non-veg">Non-veg</option>
+                </select>
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('food_type')?.hasError('required')">User
+                    Food Type is
+                    required</div>
+            </div>
+            <div>
+                <label class="text-sm font-medium text-gray-900">
+                    Food Category <span class="error">*</span>
+                </label>
+                <select name="type" id="type" formControlName="category"
+                    class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5">
+                    <option value="" selected hidden>Select Food Category</option>
+                    <option value="indian">Indian</option>
+                    <option value="itallian">Itallian</option>
+                    <option value="chinese">Chinese</option>
+                </select>
+                <div class="error" *ngIf="dataVerify && updateItemForm.get('category')?.hasError('required')">
+                    Category is required
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <button
+                class="bg-black hover:bg-slate-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:none text-white"
+                type="submit">
+                Update Item
+            </button>
+        </div>
+    </form>
+</div>
+
+<p-toast></p-toast>

@@ -7,6 +7,7 @@ import { ItemsListComponent } from './components/food/items-list/items-list.comp
 import { CreateItemComponent } from './components/food/create-item/create-item.component';
 import { UserDescComponent } from './components/user/user-desc/user-desc.component';
 import { AuthGuardService } from './_services/auth-guard.service';
+import { UpdateItemComponent } from './components/food/update-item/update-item.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'user/desc', component: UserDescComponent },
       { path: 'food/list', component: ItemsListComponent },
       { path: 'food/create', component: CreateItemComponent },
+      { path: 'food/edit/:id', component: UpdateItemComponent },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
