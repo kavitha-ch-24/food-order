@@ -1,11 +1,17 @@
-<div *ngIf="foodLists" class="xl:w-[1200px] px-10 mx-auto lg:w-[900px] md:w-full sm:w-full xs:w-full">
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
+<div *ngIf="foodLists" class="px-10 mx-auto xl:w-[1200px] lg:w-[900px] md:w-full sm:w-full xs:w-full">
     <div class="grid gap-5 mb-28 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
         <div *ngFor="let item of foodLists; let i = index"
             class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
             <div>
                 <div class="relative group">
-                    <img src={{item.image_url}} class="mx-auto w-96 h-56 bg-center bg-cover">
-                    <div routerLink="/food/edit/{{item._id}}" (click)="getItemId(item)"
+                    <img src={{item.image_url}}
+                        class="mx-auto w-96 lg:h-56 md:h-56 sm:h-56 h-auto bg-center bg-cover object-cover ">
+                    <div routerLink="/food/edit/{{item._id}}"
                         class="absolute top-0 right-0 p-1 px-2 bg-black opacity-0 group-hover:opacity-100 cursor-pointer">
                         <i class="fa fa-solid fa-edit shadow-md text-white shadow-slate-600"></i>
                     </div>
@@ -15,16 +21,24 @@
                     <i [ngClass]="item.food_type === 'veg' ? 'fa-regular fa-circle-stop text-green-600' : 'fa-regular fa-square-caret-up text-red-600'"
                         aria-hidden="true"></i> {{item.food_type | titlecase}}
                 </div>
-                <div class="m-2 text-start font-bold text-gray-800 px-3">
-                    <i class="fa-solid fa-indian-rupee-sign"></i> {{item.price}}.00
+                <div class="m-2 py-1 text-start font-bold text-gray-800 px-3">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <i class="fa-solid fa-indian-rupee-sign"></i> {{item.price}}.00
+                        </div>
+                        <div>
+                            <div class="bg-[#949494] text-white rounded-3xl p-1 text-[13px]">{{item.category |
+                                titlecase}}</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-justify px-3">
                     {{item.description}}
                 </div>
-                <div class="absolute inset-x-0 bottom-0">
+                <!-- <div class="absolute inset-x-0 bottom-0">
                     <button class="bg-red-600 text-white rounded-3xl py-2 px-3 mx-3 my-4">Add to cart <i
                             class="fa-solid fa-plus"></i></button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

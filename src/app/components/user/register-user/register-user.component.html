@@ -1,3 +1,8 @@
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
 <div class="flex items-center justify-center h-[100vh] ">
     <form [formGroup]="registerForm" (ngSubmit)="createAccount()">    
             <div class="w-full bg-white rounded-lg shadow border">

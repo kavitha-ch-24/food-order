@@ -1,3 +1,8 @@
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
 <div class="my-5 px-10 mx-auto xl:w-[1200px] lg:w-[800px] md:w-[580px] sm:w-full xs:w-full">
     <h3 class="font-bold text-xl mb-3">Item Creation Form</h3>
     <form [formGroup]="itemCreateForm" (ngSubmit)="createItem()"
@@ -72,7 +77,8 @@
                 <select name="type" id="type" formControlName="category"
                     class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 focus:outline-none sm:text-sm rounded-lg w-full p-2.5">
                     <option value="" selected hidden>Select Food Category</option>
-                    <option value="indian">Indian</option>
+                    <option value="south indian">South Indian</option>
+                    <option value="north indian">North Indian</option>
                     <option value="itallian">Itallian</option>
                     <option value="chinese">Chinese</option>
                 </select>

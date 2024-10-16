@@ -19,6 +19,7 @@ export class RegisterUserComponent {
   registerForm: FormGroup;
   dataVerify: boolean = false;
   confirmPassword: any;
+  spinner:boolean = true;
 
   constructor(private messageService: MessageService, private userServ: UserService, private primengConfig: PrimeNGConfig, private router: Router) {
     this.registerForm = new FormGroup({

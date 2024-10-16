@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 export class ItemsListComponent {
   itemClick: boolean = false;
   foodLists: any[] = [];
+  spinner:boolean = true;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService) { }
 
@@ -35,6 +36,7 @@ export class ItemsListComponent {
     this.foodServ.getFoodItemsList().subscribe({
       next: (res: any) => {
         console.log(res);
+        this.spinner = false;
         this.foodLists = res.data;
       }, error: (err: any) => {
         console.log(err);
@@ -45,9 +47,5 @@ export class ItemsListComponent {
         }
       }
     })
-  }
-
-  getItemId(data:any){
-    console.log(data);
   }
 }

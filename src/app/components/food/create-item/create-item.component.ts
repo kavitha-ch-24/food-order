@@ -21,6 +21,7 @@ export class CreateItemComponent {
   dataVerify: boolean = false;
   userData: any;
   imgFile: any;
+  spinner:boolean = true;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService,private primengConfig: PrimeNGConfig, private messageService: MessageService,  private router: Router) {
     this.itemCreateForm = new FormGroup({
@@ -64,6 +65,7 @@ export class CreateItemComponent {
       this.foodServ.createItem(this.itemCreateForm.value).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.spinner = false;
           if (res.status === 200) {
             this.messageService.add({ severity: 'success', summary: 'Item Created', detail: res.msg });
             setTimeout(() => {

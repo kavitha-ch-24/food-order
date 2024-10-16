@@ -26,4 +26,21 @@ export class FoodService {
     apiData.append('created_by', data.created_by);
     return this.http.post(this.apiUrl + '/item/addItem', apiData);
   }
+
+  updateItem(data: any): Observable<any> {
+    // let apiData = new FormData();
+    // apiData.append('itemName', data.itemName);
+    // apiData.append('description', data.description);
+    // apiData.append('image_url', data.image_url);
+    // apiData.append('price', data.price);
+    // apiData.append('food_type', data.food_type);
+    // apiData.append('category', data.category);
+    return this.http.put(this.apiUrl + `/item/editItem/${data.id}`, data);
+  }
+
+  updateItemImage(data: any): Observable<any> {
+    let imgData = new FormData();
+    imgData.append('image_url', data.image_url);
+    return this.http.put(this.apiUrl + `/item/editImage/${data.id}`, imgData);
+  }
 }
