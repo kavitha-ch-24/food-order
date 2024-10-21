@@ -3,8 +3,8 @@
     <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
 </div>
 
-<div *ngIf="foodLists" class="px-10 mx-auto xl:w-[1200px] lg:w-[900px] md:w-full sm:w-full xs:w-full">
-    <div class="grid gap-5 mb-28 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
+<div *ngIf="foodLists" class="lg:ms-10 md:ms-10 px-5">
+    <div class="grid gap-5 mb-28 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
         <div *ngFor="let item of foodLists; let i = index"
             class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
             <div>
@@ -22,12 +22,12 @@
                         aria-hidden="true"></i> {{item.food_type | titlecase}}
                 </div>
                 <div class="m-2 py-1 text-start font-bold text-gray-800 px-3">
-                    <div class="flex justify-between items-center">
-                        <div>
+                    <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1">
+                        <div class="col-span-1 mb-2 text-center">
                             <i class="fa-solid fa-indian-rupee-sign"></i> {{item.price}}.00
                         </div>
-                        <div>
-                            <div class="bg-[#949494] text-white rounded-3xl p-1 text-[13px]">{{item.category |
+                        <div class="col-span-1">
+                            <div class="bg-[#949494] text-white rounded-3xl p-1 text-[13px] text-center">{{item.category |
                                 titlecase}}</div>
                         </div>
                     </div>

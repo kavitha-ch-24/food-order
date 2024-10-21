@@ -19,7 +19,7 @@ export class RegisterUserComponent {
   registerForm: FormGroup;
   dataVerify: boolean = false;
   confirmPassword: any;
-  spinner:boolean = true;
+  spinner:boolean = false;
 
   constructor(private messageService: MessageService, private userServ: UserService, private primengConfig: PrimeNGConfig, private router: Router) {
     this.registerForm = new FormGroup({
@@ -50,8 +50,10 @@ export class RegisterUserComponent {
         this.userServ.createUser(this.registerForm.value).subscribe({
           next: (res: any) => {
             console.log(res);
+            this.spinner = true;
             if (res.status === 200) {
               this.messageService.add({ severity: 'success', summary: 'Account Created', detail: res.msg });
+              this.spinner = false;
               this.router.navigate(['/login'])
             } else {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: res.error });

@@ -13,51 +13,30 @@ import { DataServiceService } from '../../_services/data-service.service';
 export class SidebarComponent {
   dashboard: boolean = false;
   item: boolean = false;
-  itemClick: boolean = false;
   profile: boolean = false;
   value: string = '';
 
   constructor(private dataServ: DataServiceService) { }
 
-  ngOnInit(): void {
-    this.dataServ.itemClick$.subscribe((value) => {
-      this.itemClick = value;
-    });
-  }
-
-  dashboardAccess() {
-    this.dashboard = !this.dashboard;
-    this.value = 'dashboard';
-    console.log(this.itemClick, this.value, "dash");
-  }
-
-  menuItems() {
-    this.item = !this.item;
-    this.value = "menu";
-    console.log(this.itemClick, this.value, "menu");
-  }
-
-  profileAccess() {
-    this.profile = !this.profile;
-    this.value = "profile";
-    console.log(this.itemClick, this.value, "profile");
-  }
-
+  ngOnInit(): void { }
 
   activeMenu: number | null = null;
   activeSubmenu: number | null = null;
 
   setActiveMenu(menuIndex: number) {
     if (this.activeMenu === menuIndex) {
-      this.activeMenu = null; 
+      this.activeMenu = null;
     } else {
       this.activeMenu = menuIndex;
-      this.activeSubmenu = null; 
+      this.activeSubmenu = null;
     }
   }
 
   setActiveSubmenu(submenuIndex: number) {
     this.activeSubmenu = submenuIndex;
   }
-  
+
+  toggleSidebar() {
+    this.dataServ.toggleSidebar();
+  }
 }

@@ -30,7 +30,11 @@ export class NavbarComponent {
     this.showList = false;
   }
 
-  logout(){
+  logout() {
     this.dataServ.clearUserInfo();
+  }
+
+  toggleSidebar() {
+    this.dataServ.toggleSidebar();
   }
 }

@@ -10,16 +10,9 @@ import { DataServiceService } from '../../_services/data-service.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-  itemClick: boolean = false;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService) { }
 
-  ngOnInit(): void {
-    this.ar.url.subscribe((params) => {
-      if (params[0].path === 'dashboard') {
-        this.dataServ.setItemClick(this.itemClick);
-      }
-    });
-  }
+  ngOnInit(): void { }
 
 }

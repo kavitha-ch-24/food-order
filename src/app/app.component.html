@@ -2,17 +2,17 @@
     <router-outlet></router-outlet>
 </div>
 
-<div *ngIf="showMenu">
+<div class="relative" *ngIf="showMenu">
     <div class="fixed w-full top-0 left-0 z-50">
         <app-navbar></app-navbar>
     </div>
-    <div class="grid top-20 lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-1 xs:grid-cols-1">
-        <div class=" lg:block md:block hidden z-50 lg:col-span-1 md:col-span-1">
+    <div class="grid top-20 lg:grid-cols-5 md:grid-cols-5 grid-cols-1">
+        <div class="lg:block md:block lg:col-span-1 md:col-span-1 inset-0 z-50" 
+             [ngClass]="{'block': sidebar, 'hidden': !sidebar}">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="lg:col-span-4 md:col-span-4 sm:grid-cols-1 xs:grid-cols-1 my-24">
+        <div class="lg:col-span-4 md:col-span-4 grid-cols-1 my-20 lg:ms-5 md:ms-5 px-5">
             <router-outlet></router-outlet>
-            <!-- <footer class=" bg-gray-200 text-center py-4">Food Ordering Site &copy;2024 Implement By ittstar.com</footer> -->
         </div>
-    </div>
+    </div> 
 </div>

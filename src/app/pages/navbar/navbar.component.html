@@ -1,35 +1,43 @@
 <div class="shadow-md relative bg-white">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
         <div>
-            <img src="assets/images/logo.png" class="object-cover" width="60px" class="rounded-full mx-10 my-2">
+            <img src="assets/images/logo.png" class="object-cover" width="60px"
+                class="lg:w-[50px] md:w-[50px] w-[40px] rounded-full ms-5 my-2">
         </div>
-        <!-- <div class="mx-10 my-2 flex items-center relative">
-            <img src="assets/images/profile-img.jpg" width="50px" class="rounded-full">
-            <div>
-                <div (click)="showUserInfo()" class="flex items-center cursor-pointer relative">
-                    <div class="ms-2 text-[16px]"><span class="text-green-600 font-bold">Hi,</span> {{userName}}</div>
-                    <i class="fa-solid fa-angle-down ps-2"></i>
-                </div>
-                <div *ngIf="showList" class="absolute right-0 bg-white border border-gray-300 shadow-md rounded mt-2 w-40 profile-dropdown">
-                    <li class="list-none py-2 px-4 hover:bg-gray-100 cursor-pointer">My Profile</li>
-                    <li class="list-none py-2 px-4 hover:bg-gray-100 cursor-pointer text-red-600">Logout</li>
+        <div class="mx-5 my-2 flex items-center justify-between relative cursor-pointer">
+            <div class="flex items-center me-2" (mouseenter)="onMouseEnter()"
+            (mouseleave)="onMouseLeave()">
+                <img src="assets/images/profile-img.jpg"
+                    class="object-cover lg:w-[50px] md:w-[50px] w-[35px] rounded-full" width="50px">
+                <div>
+                    <div class="flex items-center relative">
+                        <div class="ms-2 lg:text-[16px] md:text-[16px] text-[12px]"><span
+                                class="text-green-600 font-bold">Hi,</span> {{userName}}</div>
+                        <i class="fa-solid fa-angle-down lg:ps-2 md:ps-2 ps-1"></i>
+                    </div>
+
+                    <ul *ngIf="showList"
+                        class="absolute right-0 bg-white border border-gray-300 shadow-md rounded mt-3 w-40 profile-dropdown">
+                        <li class="list-none py-2 px-4 hover:bg-gray-100" routerLink="/user/desc"
+                            routerLinkActive="active">
+                            <i class="fa-solid fa-user me-1"></i> My Profile
+                        </li>
+                        <li (click)="logout()" routerLink="/login"
+                            class="list-none py-2 px-4 hover:bg-gray-100 text-red-500"><i
+                                class="fa-solid fa-right-from-bracket me-1"></i> Logout</li>
+                    </ul>
                 </div>
             </div>
-        </div> -->
-        <div class="mx-10 my-2 flex items-center relative cursor-pointer" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-            <img src="assets/images/profile-img.jpg" class="object-cover" width="50px" class="rounded-full">
             <div>
-                <div class="flex items-center relative">
-                    <div class="ms-2 text-[16px]"><span class="text-green-600 font-bold">Hi,</span> {{userName}}</div>
-                    <i class="fa-solid fa-angle-down ps-2"></i>
-                </div>
-
-                <ul *ngIf="showList"
-                    class="absolute right-0 bg-white border border-gray-300 shadow-md rounded mt-3 w-40 profile-dropdown">
-                    <li class="list-none py-2 px-4 hover:bg-gray-100" routerLink="/user/desc" routerLinkActive="active"><i class="fa-solid fa-user me-1"></i> My Profile</li>
-                    <li (click)="logout()" routerLink="/login" class="list-none py-2 px-4 hover:bg-gray-100 text-red-500"><i
-                            class="fa-solid fa-right-from-bracket me-1"></i> Logout</li>
-                </ul>
+                <button (click)="toggleSidebar()" class="lg:hidden" data-collapse-toggle="navbar-default" type="button"
+                    class="flex items-center py-2 w-9 h-6 justify-center text-sm text-gray-500 rounded-md md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-default" aria-expanded="false">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>

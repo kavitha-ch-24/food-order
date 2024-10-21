@@ -21,7 +21,7 @@ export class CreateItemComponent {
   dataVerify: boolean = false;
   userData: any;
   imgFile: any;
-  spinner:boolean = true;
+  spinner:boolean = false;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService,private primengConfig: PrimeNGConfig, private messageService: MessageService,  private router: Router) {
     this.itemCreateForm = new FormGroup({
@@ -37,13 +37,7 @@ export class CreateItemComponent {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    this.ar.url.subscribe((params) => {
-      if (params[0].path === 'food') {
-        // console.log(params);
-        this.itemClick = true;
-        this.dataServ.setItemClick(this.itemClick);
-      }
-    })
+    this.ar.url.subscribe((params) => { })
     this.userData = this.dataServ.getUserInfo()?.data;
   }
 
@@ -65,9 +59,10 @@ export class CreateItemComponent {
       this.foodServ.createItem(this.itemCreateForm.value).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.spinner = false;
+          this.spinner = true;
           if (res.status === 200) {
             this.messageService.add({ severity: 'success', summary: 'Item Created', detail: res.msg });
+            this.spinner = false;
             setTimeout(() => {
               this.router.navigate(['/food/list']);
             }, 5000);

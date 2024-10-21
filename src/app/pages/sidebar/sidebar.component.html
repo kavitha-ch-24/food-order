@@ -1,16 +1,16 @@
 <div
-    class="flex h-[100%] fixed top-20 flex-col bg-gray-100 bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5 xl:w-[280px] lg:w-[250px] md:w-[200px]">
+    class="flex h-[100%] fixed lg:top-16 lg:mt-1 md:top-16 md:mt-1 top-12 mt-3 flex-col bg-gray-100 bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5 xl:w-[280px] lg:w-[250px] md:w-[200px] w-full">
     <ul class="flex flex-col mt-4 cursor-pointer">
         <li class="pt-0.5">
             <a class="flex items-center justify-between py-2 px-6"
                 [ngClass]="{'text-blue-700': activeMenu === 1}" (click)="setActiveMenu(1)">
                 Dashboard
-                <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 1}">
+                <span class="ml-auto transition-transform duration-300">
                     &#9660;
                 </span>
             </a>
             <ul class="pl-6" *ngIf="activeMenu === 1">
-                <li>
+                <li (click)="toggleSidebar()">
                     <a routerLink="/dashboard" class="block py-2 px-4"
                         [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 1}"
                         (click)="setActiveSubmenu(1)">Dashboard</a>
@@ -27,12 +27,12 @@
                 </span>
             </a>
             <ul class="pl-6" *ngIf="activeMenu === 2">
-                <li>
+                <li (click)="toggleSidebar()">
                     <a routerLink="/food/list" class="block py-2 px-4"
                         [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 4}" (click)="setActiveSubmenu(4)">Items
                         List</a>
                 </li>
-                <li>
+                <li (click)="toggleSidebar()">
                     <a routerLink="/food/create" class="block py-2 px-4"
                         [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 5}" (click)="setActiveSubmenu(5)">Create
                         Item</a>
@@ -49,7 +49,7 @@
                 </span>
             </a>
             <ul class="pl-6" *ngIf="activeMenu === 3">
-                <li>
+                <li (click)="toggleSidebar()">
                     <a routerLink="/user/desc" class="block py-2 px-4"
                         [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 7}" (click)="setActiveSubmenu(7)">My
                         Profile</a>
@@ -58,3 +58,12 @@
         </li>
     </ul>
 </div>
+
+
+
+
+
+
+
+
+

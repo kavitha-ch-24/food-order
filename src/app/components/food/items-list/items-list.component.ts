@@ -15,20 +15,12 @@ import { CommonModule } from '@angular/common';
   providers: [MessageService]
 })
 export class ItemsListComponent {
-  itemClick: boolean = false;
   foodLists: any[] = [];
   spinner:boolean = true;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService) { }
 
   ngOnInit(): void {
-    this.ar.url.subscribe((params) => {
-      if (params[0].path === 'food') {
-        // console.log(params);
-        this.itemClick = true;
-        this.dataServ.setItemClick(this.itemClick);
-      }
-    });
     this.getItemList();
   }
 

@@ -12,12 +12,8 @@ export class DataServiceService {
 
   constructor(private authServ: AuthService, private router: Router) { }
 
-  private itemClickSubject = new BehaviorSubject<boolean>(false);
-  itemClick$ = this.itemClickSubject.asObservable();
-
-  setItemClick(value: boolean) {
-    this.itemClickSubject.next(value);
-  }
+  private sidebarState = new BehaviorSubject<boolean>(false);
+  // sidebarState = this.sidebarOpen.asObservable();
 
   getUserInfo() {
     if (typeof window !== 'undefined' && typeof localStorage !== undefined) {
@@ -40,5 +36,17 @@ export class DataServiceService {
   clearUserInfo() {
     this.authServ.logout();
     this.router.navigate(['/login']);
+  }
+
+  // toggleSidebar() {
+  //   this.sidebarOpen.next(!this.sidebarOpen.value);
+  // }
+
+  toggleSidebar() {
+    this.sidebarState.next(!this.sidebarState.value);
+  }
+
+  getSidebarState() {
+    return this.sidebarState.asObservable();
   }
 }
