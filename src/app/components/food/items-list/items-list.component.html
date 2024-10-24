@@ -5,22 +5,22 @@
 
 <div>
     <div
-        class="lg:ms-10 md:ms-10 lg:w-auto md:w-auto w-96 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        class="lg:ms-10 md:ms-10 w-auto text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <ul class="flex flex-wrap -mb-px cursor-pointer">
-            <li class="me-2" (click)="foodTabList(null)">
+            <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList(null)">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab == null}"
                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">All</a>
             </li>
-            <li class="me-2" (click)="foodTabList('north indian', 'south indian')">
+            <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList('north indian', 'south indian')">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab?.includes('north indian') || selectedTab?.includes('south indian')}"
                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Indian</a>
             </li>
-            <li class="me-2" (click)="foodTabList('chinese')">
+            <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList('chinese')">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab == 'chinese'}"
                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
                     aria-current="page">Chinese</a>
             </li>
-            <li class="me-2" (click)="foodTabList('itallian')">
+            <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList('itallian')">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab == 'itallian'}"
                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Italian</a>
             </li>
