@@ -68,7 +68,7 @@ export class ItemsListComponent {
   addToCart(data: any, cartState?: string) {
     // console.log(data);
     const itemInCart = this.filteredFoodLists.find(item => item._id === data._id);
-    
+
     let itemData = {
       itemId: data._id,
       userId: this.userData.id,
@@ -110,11 +110,15 @@ export class ItemsListComponent {
         console.log(res, "cart count");
         this.quantityArray = res.data;
         console.log(this.quantityArray);
-        let totalQuantity = 0;
-        this.quantityArray.forEach((item: any) => {
-          totalQuantity += item.quantity;
+        if (this.quantityArray.length > 0) {
+          let totalQuantity = 0;
+          this.quantityArray.forEach((item: any) => {
+            totalQuantity += item.quantity;
+          });
           this.dataServ.cartCount.next(totalQuantity);
-        });
+        } else {
+          this.dataServ.cartCount.next(0);
+        }
       }, error: (err: any) => {
         console.log(err);
         if (err.status === 404) {

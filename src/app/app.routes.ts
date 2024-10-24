@@ -9,6 +9,7 @@ import { UserDescComponent } from './components/user/user-desc/user-desc.compone
 import { AuthGuardService } from './_services/auth-guard.service';
 import { UpdateItemComponent } from './components/food/update-item/update-item.component';
 import { CartComponent } from './components/food/cart/cart.component';
+import { PaymentComponent } from './components/food/payment/payment.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'food/create', component: CreateItemComponent },
       { path: 'food/edit/:id', component: UpdateItemComponent },
       { path: 'food/cart', component: CartComponent },
+      { path: 'food/payment', component: PaymentComponent },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

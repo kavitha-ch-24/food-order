@@ -23,7 +23,10 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.dataServ.getCartCount().subscribe(count => {
-      this.cartItemCount = count; 
+      this.cartItemCount = count;
+      if (!count) { 
+        this.cartItemCount = 0; 
+      }
     });
   }
 
@@ -42,7 +45,7 @@ export class NavbarComponent {
 
   logout() {
     this.dataServ.clearUserInfo();
-    this.dataServ.resetCartCount(); 
+    this.dataServ.resetCartCount();
   }
 
   toggleSidebar() {

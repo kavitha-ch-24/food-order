@@ -4,11 +4,12 @@ import { FoodService } from '../../../_services/food.service';
 import { DataServiceService } from '../../../_services/data-service.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, ToastModule],
+  imports: [CommonModule, ToastModule, RouterModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   providers: [MessageService]
@@ -18,6 +19,8 @@ export class CartComponent {
   itemsArray: any[] = [];
   userData: any;
   cartButton: { [key: string]: boolean } = {};
+  totalPrice: number = 0;
+  totalQuantity: number = 0;
 
   constructor(private foodServ: FoodService, private dataServ: DataServiceService, private msgServ: MessageService) { }
 
@@ -33,12 +36,20 @@ export class CartComponent {
         console.log(res, "cart count");
         this.spinner = false;
         this.itemsArray = res.data;
-        console.log(this.itemsArray);
-        let totalQuantity = 0;
-        this.itemsArray.forEach((item: any) => {
-          totalQuantity += item.quantity;
+        console.log(this.itemsArray,"itemArray");
+        if (this.itemsArray.length > 0) {
+          let totalQuantity = 0;
+          let sum=0;
+          this.itemsArray.forEach((item: any) => {
+            sum=sum+(item.quantity*item.itemPrice)
+            console.log(sum,"this.totalPrice")
+            totalQuantity += item.quantity;
+          });
+          this.totalPrice=sum;
           this.dataServ.cartCount.next(totalQuantity);
-        });
+        } else {
+          this.dataServ.cartCount.next(0);
+        }
       }, error: (err: any) => {
         console.log(err);
         if (err.status === 404) {
@@ -67,7 +78,7 @@ export class CartComponent {
 
     if (itemInCart) {
       this.cartButton[data._id] = true;
-      // console.log('Item added to cart:', data._id);
+
       this.foodServ.addToCart(itemData).subscribe({
         next: (res: any) => {
           console.log(res);
