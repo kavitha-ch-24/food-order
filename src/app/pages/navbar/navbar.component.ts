@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataServiceService } from '../../_services/data-service.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FoodService } from '../../_services/food.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +14,22 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
   userName: string = '';
   showList: boolean = false;
+  userData: any;
+  cartItemCount: number = 0;
 
-  constructor(private dataServ: DataServiceService) {
+  constructor(private dataServ: DataServiceService, private foodServ: FoodService) {
     this.getUserData();
+  }
+
+  ngOnInit(): void {
+    this.dataServ.getCartCount().subscribe(count => {
+      this.cartItemCount = count; 
+    });
   }
 
   getUserData() {
     this.userName = this.dataServ.getUserInfo()?.data?.name;
+    this.userData = this.dataServ.getUserInfo()?.data;
   }
 
   onMouseEnter() {
@@ -32,6 +42,7 @@ export class NavbarComponent {
 
   logout() {
     this.dataServ.clearUserInfo();
+    this.dataServ.resetCartCount(); 
   }
 
   toggleSidebar() {

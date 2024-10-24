@@ -5,6 +5,7 @@ import { UserService } from '../../../_services/user.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '../../../_services/auth.service';
+import { DataServiceService } from '../../../_services/data-service.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { AuthService } from '../../../_services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private userServ: UserService, private primengConfig: PrimeNGConfig, private messageService: MessageService, private router: Router, private authServ: AuthService) {
+  constructor(private userServ: UserService, private primengConfig: PrimeNGConfig, private messageService: MessageService, private router: Router, private authServ: AuthService, private dataServ:DataServiceService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -41,8 +42,9 @@ export class LoginComponent {
             localStorage.setItem('userData', JSON.stringify(res));
             this.messageService.add({ severity: 'success', summary: 'Login Success', detail: res.msg });
             this.authServ.login();
+            this.dataServ.getCartCount(); 
             setTimeout(() => {
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/food/list']);
             }, 2000);
           } else {
             this.messageService.add({ severity: 'error', summary: 'Please try again later', detail: res.msg });

@@ -3,11 +3,33 @@
     <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
 </div>
 
+<div
+    class="lg:ms-10 md:ms-10 lg:w-auto md:w-auto w-96 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px cursor-pointer">
+        <li class="me-2" (click)="foodTabList(null)">
+            <a [ngClass]="{'active dark:text-blue-500': selectedTab == null}"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">All</a>
+        </li>
+        <li class="me-2" (click)="foodTabList('north indian', 'south indian')">
+            <a [ngClass]="{'active dark:text-blue-500': selectedTab?.includes('north indian') || selectedTab?.includes('south indian')}"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Indian</a>
+        </li>
+        <li class="me-2" (click)="foodTabList('chinese')">
+            <a [ngClass]="{'active dark:text-blue-500': selectedTab == 'chinese'}"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+                aria-current="page">Chinese</a>
+        </li>
+        <li class="me-2" (click)="foodTabList('itallian')">
+            <a [ngClass]="{'active dark:text-blue-500': selectedTab == 'itallian'}"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Italian</a>
+        </li>
+    </ul>
+</div>
+
 <div *ngIf="foodLists" class="lg:ms-10 md:ms-10 px-5">
-    <div class="grid gap-5 mb-28 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
-        <div *ngFor="let item of foodLists; let i = index"
-            class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
-            <div>
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
+        <div *ngFor="let item of filteredFoodLists; let i = index">
+            <div class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
                 <div class="relative group">
                     <img src={{item.image_url}}
                         class="mx-auto w-96 lg:h-56 md:h-56 sm:h-56 h-auto bg-center bg-cover object-cover ">
@@ -27,7 +49,8 @@
                             <i class="fa-solid fa-indian-rupee-sign"></i> {{item.price}}.00
                         </div>
                         <div class="col-span-1">
-                            <div class="bg-[#949494] text-white rounded-3xl p-1 text-[13px] text-center">{{item.category |
+                            <div class="bg-[#949494] text-white rounded-3xl p-1 text-[13px] text-center">{{item.category
+                                |
                                 titlecase}}</div>
                         </div>
                     </div>
@@ -35,10 +58,18 @@
                 <div class="text-justify px-3">
                     {{item.description}}
                 </div>
-                <!-- <div class="absolute inset-x-0 bottom-0">
+                <div class="absolute inset-x-0 bottom-0" (click)="addToCart(item)">
                     <button class="bg-red-600 text-white rounded-3xl py-2 px-3 mx-3 my-4">Add to cart <i
                             class="fa-solid fa-plus"></i></button>
-                </div> -->
+                </div>
+                <div *ngFor="let qty of quantityArray; let j = index" class="absolute inset-x-0 bottom-0 w-40 mx-auto">
+                    <div *ngIf="qty.quantity > 0 && item._id == qty.itemId"
+                        class="bg-red-600 text-white rounded-3xl py-2 px-3 mx-3 my-4 flex justify-between items-center cursor-pointer">
+                        <i (click)="addToCart(item, 'sub')" class="fa-solid fa-minus"></i>
+                        <div>{{qty.quantity}}</div>
+                        <i (click)="addToCart(item, 'add')" class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

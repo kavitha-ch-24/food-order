@@ -1,0 +1,41 @@
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
+<div class="my-5 px-10 grid grid-cols-3">
+    <div class="col-span-2">
+        <div *ngFor="let item of itemsArray" class="p-5 m-5 border border-slate-400 shadow-md rounded-lg">
+            <div class="grid grid-cols-3 gap-5">
+                <img src={{item.itemImageUrl}} width="200px" class="object-cover rounded-md">
+                <div class="flex items-center">
+                    <i [ngClass]="item.itemType === 'veg' ? 'fa-regular fa-circle-stop text-green-600' : 'fa-regular fa-square-caret-up text-red-600'"
+                        aria-hidden="true"></i>
+                    <h2 class="font-bold text-base ms-2">{{item.itemName}}</h2>
+                </div>
+                <div class="flex items-center mx-auto">
+                    <div class="py-2 px-3 mx-3 my-4 cursor-pointer">
+                        <div class="flex justify-between items-center my-3">
+                            <i (click)="addToCart(item, 'sub')" class="fa-solid fa-minus mx-4"></i>
+                            <div class="border border-slate-400 px-5">{{item.quantity}}</div>
+                            <i (click)="addToCart(item, 'add')" class="fa-solid fa-plus mx-4"></i>
+                        </div>
+                        <div class="mx-4 flex items-center justify-center font-medium"><i class="fa-solid fa-indian-rupee-sign me-1"></i>{{item.quantity * item.itemPrice}}.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-1">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut minima modi animi necessitatibus ducimus minus
+        beatae numquam natus eligendi non esse, quibusdam cupiditate accusantium explicabo corrupti mollitia dolore
+        magni quidem ipsam fugiat at consequatur nihil, reprehenderit aperiam. Reiciendis quis ad voluptate!
+        Necessitatibus eligendi veritatis accusantium, quasi in minus, incidunt possimus eos, molestias voluptate
+        quia id! Doloremque modi quaerat, repudiandae eos recusandae neque obcaecati nam distinctio tempore dolorum
+        accusantium aut molestias dicta error iste qui. Hic vitae, ratione dolorem asperiores itaque facilis.
+        Repellat, tempora nesciunt molestiae nemo, provident voluptate soluta praesentium eaque laudantium, corporis
+        sed cupiditate magnam rerum perspiciatis iusto vel?
+    </div>
+</div>
+
+<p-toast></p-toast>

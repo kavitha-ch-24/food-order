@@ -28,13 +28,6 @@ export class FoodService {
   }
 
   updateItem(data: any): Observable<any> {
-    // let apiData = new FormData();
-    // apiData.append('itemName', data.itemName);
-    // apiData.append('description', data.description);
-    // apiData.append('image_url', data.image_url);
-    // apiData.append('price', data.price);
-    // apiData.append('food_type', data.food_type);
-    // apiData.append('category', data.category);
     return this.http.put(this.apiUrl + `/item/editItem/${data.id}`, data);
   }
 
@@ -42,5 +35,14 @@ export class FoodService {
     let imgData = new FormData();
     imgData.append('image_url', data.image_url);
     return this.http.put(this.apiUrl + `/item/editImage/${data.id}`, imgData);
+  }
+
+  addToCart(data: any): Observable<any> {
+    console.log(data, "api data");
+    return this.http.post(this.apiUrl + '/cart/addCart', data);
+  }
+
+  cartCountCheck(id: any): Observable<any> {
+    return this.http.get(this.apiUrl + `/cart/cartDetails/${id}`);
   }
 }

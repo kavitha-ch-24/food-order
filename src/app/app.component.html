@@ -2,16 +2,16 @@
     <router-outlet></router-outlet>
 </div>
 
-<div class="relative" *ngIf="showMenu">
+<div *ngIf="showMenu">
     <div class="fixed w-full top-0 left-0 z-50">
         <app-navbar></app-navbar>
     </div>
-    <div class="grid top-20 lg:grid-cols-5 md:grid-cols-5 grid-cols-1">
+    <div class="grid top-16 lg:grid-cols-5 md:grid-cols-5 grid-cols-1">
         <div class="lg:block md:block lg:col-span-1 md:col-span-1 inset-0 z-50" 
              [ngClass]="{'block': sidebar, 'hidden': !sidebar}">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="lg:col-span-4 md:col-span-4 grid-cols-1 my-20 lg:ms-5 md:ms-5 px-5">
+        <div class="lg:col-span-4 md:col-span-4 grid-cols-1 my-20 xl:ms-0 xl:me-10 lg:ms-10 md:ms-5 px-5">
             <router-outlet></router-outlet>
         </div>
     </div> 

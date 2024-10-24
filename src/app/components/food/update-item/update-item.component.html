@@ -3,7 +3,7 @@
     <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
 </div>
 
-<div *ngIf="itemData" class="my-5 px-10 mx-auto xl:w-[1200px] lg:w-[800px] md:w-[580px] sm:w-full xs:w-full">
+<div *ngIf="itemData" class="my-5 px-10">
     <h3 class="font-bold text-xl mb-3">Item Update Form</h3>
     <form [formGroup]="updateItemForm" (ngSubmit)="updateItem()"
         class="border border-slate-300 p-5 rounded shadow-md bg-gray-100">

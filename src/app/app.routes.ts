@@ -8,6 +8,7 @@ import { CreateItemComponent } from './components/food/create-item/create-item.c
 import { UserDescComponent } from './components/user/user-desc/user-desc.component';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { UpdateItemComponent } from './components/food/update-item/update-item.component';
+import { CartComponent } from './components/food/cart/cart.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: 'food/list', component: ItemsListComponent },
       { path: 'food/create', component: CreateItemComponent },
       { path: 'food/edit/:id', component: UpdateItemComponent },
+      { path: 'food/cart', component: CartComponent },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

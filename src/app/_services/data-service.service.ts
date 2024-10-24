@@ -1,27 +1,44 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { FoodService } from './food.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
+
+  userInfo: any;
+  private cartItems: any[] = [];
+
   private userDataSubject = new BehaviorSubject<any>(null);
   userData$ = this.userDataSubject.asObservable();
 
-  constructor(private authServ: AuthService, private router: Router) { }
+  constructor(private authServ: AuthService, private router: Router, private foodServ: FoodService) { }
 
   private sidebarState = new BehaviorSubject<boolean>(false);
   // sidebarState = this.sidebarOpen.asObservable();
 
+  public cartCount = new BehaviorSubject<number>(0);
+
+  public itemPrice = new BehaviorSubject<number>(0);
+
+  getCartCount(): Observable<number> {
+    return this.cartCount.asObservable();
+  }
+
+  getItemPrice(): Observable<number> {
+    return this.itemPrice.asObservable();
+  }
+
   getUserInfo() {
     if (typeof window !== 'undefined' && typeof localStorage !== undefined) {
-      const userData = localStorage?.getItem("userData");
+      let userData = localStorage?.getItem("userData");
       if (userData) {
-        const parsedUserData = JSON.parse(userData);
-        this.userDataSubject.next(parsedUserData);
-        return parsedUserData;
+        this.userInfo = JSON.parse(userData);
+        this.userDataSubject.next(this.userInfo);
+        return this.userInfo;
       }
     }
   }
@@ -38,15 +55,19 @@ export class DataServiceService {
     this.router.navigate(['/login']);
   }
 
-  // toggleSidebar() {
-  //   this.sidebarOpen.next(!this.sidebarOpen.value);
-  // }
-
   toggleSidebar() {
     this.sidebarState.next(!this.sidebarState.value);
   }
 
   getSidebarState() {
     return this.sidebarState.asObservable();
+  }
+
+  resetCartCount() {
+    this.cartCount.next(0);
+  }
+
+  resetItemPrice() {
+    this.itemPrice.next(0);
   }
 }
