@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/",
+    "/dashboard",
+    "/food/cart",
+    "/food/create",
+    "/food/list",
+    "/food/payment",
+    "/login",
+    "/user/desc",
+    "/user/list",
+    "/user/register"
+  ]
+}
