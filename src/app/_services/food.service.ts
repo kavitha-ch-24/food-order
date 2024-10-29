@@ -45,4 +45,8 @@ export class FoodService {
   cartCountCheck(id: any): Observable<any> {
     return this.http.get(this.apiUrl + `/cart/cartDetails/${id}`);
   }
+
+  getDeliveryAddress(id:any){
+    return this.http.get(this.apiUrl + `/delivery/getDeliveryAddress/${id}`)
+  }
 }

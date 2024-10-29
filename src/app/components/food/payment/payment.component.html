@@ -1,17 +1,136 @@
-<div *ngFor="let item of accordionItems; let i = index" class="accordion-collapse border-b border-slate-400">
-    <h2 id="accordion-collapse-heading-{{ i }}">
-        <button type="button"
-            class="flex items-center justify-between w-full py-3 px-5"
-            (click)="toggleAccordion(i)">
-            <span>{{ item.title }}</span>
-            <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 10 6">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 5 5 1 1 5" />
-            </svg>
-        </button>
-    </h2>
-    <div *ngIf="openAccordion === i" class="py-2 px-5">
-        <p class="text-slate-700">{{ item.content }}</p>
+<div class="grid xl:grid-cols-3 grid-cols-1 gap-5">
+    <div class="xl:col-span-2">
+        <div *ngIf="userData" class="py-3 px-5 border border-slate-200 shadow-lg mt-10 flex items-center">
+            <div>
+                <div class="text-md text-slate-600 text-lg font-bold">1. Contact Info</div>
+                <div class="my-2"><span class="font-bold">{{userData.name}}</span> - {{userData.email}}</div>
+            </div>
+        </div>
+
+        <div class="my-10">
+            <div class="border-b border-slate-300 shadow-md my-2">
+                <h2 id="accordion-collapse-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full py-3 px-5"
+                        (click)="toggleAccordion(1)">
+                        <span class="font-bold text-slate-600 text-lg">2. Delivery Address</span>
+                        <svg [ngClass]="{ 'rotate-180': activeIndex === 1 }"
+                            class="w-3 h-3 shrink-0 transition-transform duration-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div *ngIf="activeIndex === 1" class="p-5 grid gap-5 xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 mb-5">
+                    <div *ngFor="let add of address">
+                        <div class="border border-slate-400 rounded-lg shadow-lg p-3 flex flex-col justify-between"
+                            style="height: 150px;">
+                            #{{add.house_No}}, {{add.locality}}, {{add.street}}, {{add.city}}, {{add.district}},
+                            {{add.state}} - {{add.pincode}}
+                            <div class="flex items-end gap-5 mt-3">
+                                <button class="py-1 border px-6 bg-orange-500 text-white">Edit</button>
+                                <button class="py-1 border px-6 bg-orange-500 text-white">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cursor-pointer text-blue-900"><i class="fa-solid fa-plus me-1"></i>Add new address</div>
+                </div>
+            </div>
+
+            <div class="border-b border-slate-300 shadow-md my-10">
+                <h2 id="accordion-collapse-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full py-3 px-5"
+                        (click)="toggleAccordion(2)">
+                        <span class="font-bold text-slate-600 text-lg">3. Payment Options</span>
+                        <svg [ngClass]="{ 'rotate-180': activeIndex === 2 }"
+                            class="w-3 h-3 shrink-0 transition-transform duration-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div *ngIf="activeIndex === 2">
+                    <div class="px-5 py-5 border-b-2 border-slate-300 cursor-pointer"
+                        [ngClass]="activeBgColor === 'card' ? 'bg-zinc-100' : ''" (click)="checkPaymentOption('card')">
+                        <div class="flex mb-3">
+                            <div class="ms-4">Credit / Debit / ATM Card</div>
+                        </div>
+                        <div class="px-7">
+                            <input type="text" placeholder="Enter card number"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-slate-500 block w-full p-4 focus:outline-none"
+                                required>
+                            <div class="flex gap-3 mt-6 w-full">
+                                <div class="w-1/4 flex gap-3">
+                                    <input type="text" placeholder="MM" maxlength="2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-slate-500 w-1/2 p-3 focus:outline-none"
+                                        required>
+
+                                    <input type="text" placeholder="YY" maxlength="2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-slate-500 w-1/2 p-3 focus:outline-none"
+                                        required>
+                                </div>
+                                <div class="flex gap-4 w-1/3">
+                                    <input type="text" placeholder="CVV"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-slate-500 block p-3 focus:outline-none w-1/2"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="py-3 px-10 font-bold text-white rounded-sm bg-orange-500 border border-orange-500 mt-5 mx-7">PAY
+                            <i class="fa-solid fa-indian-rupee-sign ms-1"></i>{{billAmount}}</button>
+                    </div>
+
+                    <div class="px-5 py-5 border-b-2 border-slate-300 cursor-pointer"
+                        [ngClass]="activeBgColor === 'upi' ? 'bg-zinc-100' : ''" (click)="checkPaymentOption('upi')">
+                        <div class="flex mb-3">
+                            <div class="ms-4">UPI</div>
+                        </div>
+                        <div class="px-7">
+                            <div class="flex items-center mb-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <img src="assets/images/gpay.png" width="30px" class="me-1">
+                                <div>Google Pay UPI</div>
+                            </div>
+                            <div class="flex mb-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <img src="assets/images/PhonePe.png" width="30px" class="me-1">
+                                <div>Phone Pay UPI</div>
+                            </div>
+                            <div class="flex mb-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <img src="assets/images/Paytm.png" width="30px" class="me-1">
+                                <div>Paytm UPI</div>
+                            </div>
+                            <input *ngIf="selectedUpi" type="text" placeholder="Enter upi id"
+                                class="mx-5 my-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-slate-500 block p-3 focus:outline-none w-full">
+                        </div>
+                    </div>
+
+                    <div class="px-5 py-5 cursor-pointer" [ngClass]="activeBgColor === 'cash' ? 'bg-zinc-100' : ''"
+                        (click)="checkPaymentOption('cash')">
+                        <div class="flex mb-3">
+                            <div class="ms-4">Cash On Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="xl:col-span-1 mt-10">
+            <div class="border border-slate-200 shadow-md py-5 px-6 mx-5 my-6">
+                <h3 class="text-lg text-slate-600 font-bold text-center border-b-2 border-slate-400">Bill Summary</h3>
+                <div *ngFor="let qty of itemsArray; let i = index">
+                    <div class="my-3 flex justify-between ">
+                        <div>{{i+1}}. {{qty.itemName}}({{qty.quantity}} items)</div>
+                        <div>{{qty.quantity * qty.itemPrice}}.00</div>
+                    </div>
+                </div>
+                <div class="my-3 flex justify-between border-t-2 border-slate-300">
+                    <div class="mt-3"><b>Order Total</b></div>
+                    <div><b>{{totalPrice}}.00</b></div>
+                </div>
+            </div>
     </div>
 </div>

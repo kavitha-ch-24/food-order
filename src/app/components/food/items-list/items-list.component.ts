@@ -26,6 +26,7 @@ export class ItemsListComponent {
   active: string = '';
   itemId: any;
   quantityArray: any[] = [];
+  desc: boolean = false;
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService) { }
 
@@ -128,5 +129,9 @@ export class ItemsListComponent {
         }
       }
     })
+  }
+
+  descMoreLess(item: any) {
+    item.showFullDesc = !item.showFullDesc;
   }
 }
