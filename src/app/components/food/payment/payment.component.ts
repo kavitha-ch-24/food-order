@@ -13,14 +13,16 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class PaymentComponent {
-  activeIndex: number | null = null;
+  // activeIndex: number | null = null;
+  activeIndex: number = 1;
   userData: any;
   billAmount: number = 0;
   itemsArray: any[] = [];
   selectedUpi: string = "";
   activeBgColor: string = "";
-  address:any[] = [];
-  totalPrice:number = 0;
+  address: any[] = [];
+  totalPrice: number = 0;
+  addressCard: boolean = false;
 
   constructor(private dataServ: DataServiceService, private foodServ: FoodService, private msgServ: MessageService) { }
 
@@ -32,7 +34,7 @@ export class PaymentComponent {
   }
 
   toggleAccordion(index: number): void {
-    this.activeIndex = this.activeIndex === index ? null : index;
+    // this.activeIndex = this.activeIndex === index ? null : index;
   }
 
   billPayment() {
@@ -76,12 +78,12 @@ export class PaymentComponent {
     console.log(data);
   }
 
-  deliveryAddress(){
+  deliveryAddress() {
     this.foodServ.getDeliveryAddress(this.userData.id).subscribe({
       next: (res: any) => {
         console.log(res.data);
         this.address = res.data;
-      }, error:(err:any)=>{
+      }, error: (err: any) => {
         console.log(err);
         if (err.status === 404) {
           this.msgServ.add({ severity: 'error', summary: 'Something went wrong', detail: 'Backend Api error' });
@@ -90,5 +92,13 @@ export class PaymentComponent {
         }
       }
     })
+  }
+
+  addressDisplay() {
+    this.addressCard = true;
+  }
+
+  addressHide() {
+    this.addressCard = false;
   }
 }

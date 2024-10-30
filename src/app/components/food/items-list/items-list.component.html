@@ -5,7 +5,7 @@
 
 <div>
     <div
-        class="lg:ms-10 md:ms-10 w-auto text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        class="fixed top-[75px] z-10 bg-white lg:ms-10 md:ms-10 w-full text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400">
         <ul class="flex flex-wrap -mb-px cursor-pointer">
             <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList(null)">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab == null}"
@@ -27,7 +27,7 @@
         </ul>
     </div>
 
-    <div *ngIf="foodLists" class="lg:ms-10 md:ms-10 px-5">
+    <div *ngIf="foodLists" class="lg:ms-10 md:ms-10 px-5 pt-10">
         <div class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
             <div *ngFor="let item of filteredFoodLists; let i = index">
                 <div class="border border-slate-300 shadow-md h-full my-8 text-center relative bg-gray-50">
