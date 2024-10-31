@@ -46,7 +46,15 @@ export class FoodService {
     return this.http.get(this.apiUrl + `/cart/cartDetails/${id}`);
   }
 
-  getDeliveryAddress(id:any){
+  getDeliveryAddress(id: any): Observable<any> {
     return this.http.get(this.apiUrl + `/delivery/getDeliveryAddress/${id}`)
+  }
+
+  addDeliveryAddress(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/delivery/addDeliveryAddress', data);
+  }
+
+  deleteDeliveryAddress(id:any):Observable<any>{
+    return this.http.delete(this.apiUrl + `/delivery/deleteDeliveryAddress/${id}`);
   }
 }

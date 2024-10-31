@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { DataServiceService } from '../../../_services/data-service.service';
 import { FoodService } from '../../../_services/food.service';
 import { MessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, ToastModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css',
   providers: [MessageService]
 })
 export class PaymentComponent {
-  // activeIndex: number | null = null;
-  activeIndex: number = 1;
+  activeIndex: number | null = null;
   userData: any;
   billAmount: number = 0;
   itemsArray: any[] = [];
@@ -23,18 +24,32 @@ export class PaymentComponent {
   address: any[] = [];
   totalPrice: number = 0;
   addressCard: boolean = false;
+  addressCreateForm: FormGroup;
 
-  constructor(private dataServ: DataServiceService, private foodServ: FoodService, private msgServ: MessageService) { }
+  constructor(private dataServ: DataServiceService, private foodServ: FoodService, private msgServ: MessageService) {
+    this.addressCreateForm = new FormGroup({
+      userId: new FormControl('', Validators.required),
+      house_No: new FormControl('', Validators.required),
+      street: new FormControl('', Validators.required),
+      locality: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      district: new FormControl('', Validators.required),
+      state: new FormControl('', Validators.required),
+      pincode: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
+      mobile_no: new FormControl('', Validators.required),
+    })
+  }
 
   ngOnInit(): void {
     this.userData = this.dataServ.getUserInfo().data;
-    // console.log(this.userData);
+    console.log(this.userData);
     this.billPayment();
     this.deliveryAddress();
   }
 
   toggleAccordion(index: number): void {
-    // this.activeIndex = this.activeIndex === index ? null : index;
+    this.activeIndex = this.activeIndex === index ? null : index;
   }
 
   billPayment() {
@@ -100,5 +115,53 @@ export class PaymentComponent {
 
   addressHide() {
     this.addressCard = false;
+  }
+
+  addAddress() {
+    this.addressCreateForm.get('userId')?.setValue(this.userData.id);
+    console.log(this.addressCreateForm.value);
+    if (this.addressCreateForm.valid) {
+      this.foodServ.addDeliveryAddress(this.addressCreateForm.value).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          if (res.status === 200) {
+            this.msgServ.add({ severity: 'success', summary: 'Address added', detail: res.message });
+            this.activeIndex = this.activeIndex === 1 ? null : 1;
+            this.addressCard = false;
+            this.deliveryAddress();
+          }
+        }, error: (err: any) => {
+          console.log(err);
+          if (err.status === 404) {
+            this.msgServ.add({ severity: 'error', summary: 'Something went wrong', detail: 'Backend Api error' });
+          } else {
+            this.msgServ.add({ severity: 'error', summary: 'Something went wrong', detail: err.error.message });
+          }
+        }
+      })
+    } else {
+      this.msgServ.add({ severity: 'error', summary: 'Invalid Form', detail: 'Please Fill data correctly' });
+    }
+  }
+
+  deleteAddress(data: any) {
+    console.log(data);
+    let id = data._id;
+    this.foodServ.deleteDeliveryAddress(id).subscribe({
+      next: (res: any) => {
+        console.log(res, "delete delivery address");
+        if (res.status === 200) {
+          this.msgServ.add({ severity: 'success', summary: 'Address Deleted', detail: res.message });
+          this.deliveryAddress();
+        }
+      }, error: (err: any) => {
+        console.log(err);
+        if (err.status === 404) {
+          this.msgServ.add({ severity: 'error', summary: 'Something went wrong', detail: 'Backend Api error' });
+        } else {
+          this.msgServ.add({ severity: 'error', summary: 'Something went wrong', detail: err.error.msg });
+        }
+      }
+    })
   }
 }
