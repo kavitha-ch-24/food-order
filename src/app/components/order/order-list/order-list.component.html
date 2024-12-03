@@ -1,0 +1,47 @@
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
+
+<div
+    class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border my-8">
+    <table class="w-full text-left table-auto min-w-max">
+        <thead>
+            <tr>
+                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p
+                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                        Name
+                    </p>
+                </th>
+                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p
+                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                        Job
+                    </p>
+                </th>
+                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p
+                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                        Employed
+                    </p>
+                </th>
+                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p
+                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    </p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders; let i = index" class="m-10 ">
+                <td>
+                    <span class="flex items-center m-3">{{order?.items[i]?.street}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p-toast></p-toast>

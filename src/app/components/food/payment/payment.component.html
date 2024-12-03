@@ -1,5 +1,6 @@
 <div class="grid xl:grid-cols-3 grid-cols-1 gap-5 relative">
-    <div *ngIf="addressCard" class="fixed inset-0 bg-opacity-60 backdrop-blur-lg bg-gray-300 z-10"></div>
+    <div *ngIf="addressCard" class="fixed inset-0 bg-opacity-60 backdrop-blur-md bg-slate-300 z-10"
+        (click)="addressHide()"></div>
     <div class="xl:col-span-2">
         <div *ngIf="userData" class="py-3 px-5 border border-slate-200 shadow-lg mt-10 flex items-center">
             <div>
@@ -23,8 +24,16 @@
                     </button>
                 </h2>
                 <div *ngIf="activeIndex === 1">
-                    <div
-                        class="cursor-pointer text-blue-900 mx-4 my-2 border border-slate-200 bg-gray-50 py-2 px-4 rounded-3xl">
+
+                    <div *ngIf="selectedAddState" class="py-2 px-4">
+                        <span class="text-blue-700 font-semibold">Selected Address:</span> #{{selectedAdd?.house_No}},
+                        {{selectedAdd?.street}}, {{selectedAdd?.city}}, {{selectedAdd?.district}},
+                        {{selectedAdd?.locality}},
+                        {{selectedAdd?.state}} - {{selectedAdd?.pincode}}
+                    </div>
+
+                    <div class="cursor-pointer text-blue-900 mx-4 my-2 border border-slate-200 bg-gray-50 py-2 px-4 rounded-3xl"
+                        (close)="addressHide()">
                         <button type="button" class="font-semibold" (click)="addressDisplay()">
                             <i class="fa-solid fa-plus me-1"></i><span>Add new address</span>
                         </button>
@@ -43,12 +52,25 @@
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="house_No">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['house_No']?.hasError('required')">House
+                                                No. is required</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['house_No']?.hasError('pattern')">House
+                                                No. should be number</p>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="font-bold" for="street">Street</label>
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="street">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['street']?.hasError('required')">Street is
+                                                required</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-4">
@@ -57,12 +79,22 @@
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="city">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['city']?.hasError('required')">City is
+                                                required</p>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="font-bold" for="dist">District</label>
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="district">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['district']?.hasError('required')">District is
+                                                required</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-4">
@@ -71,12 +103,31 @@
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="state">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['state']?.hasError('required')">State is
+                                                required</p>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="font-bold" for="pin">Pin Code</label>
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="pincode">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['pincode']?.hasError('required')">Pincode is
+                                                required</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['pincode']?.hasError('pattern')">Pincode
+                                                should be number</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['pincode']?.hasError('minlength')">Pincode
+                                                length should be 6</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['pincode']?.hasError('maxlength')">Pincode can
+                                                have only 6 numbers</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-5">
@@ -84,6 +135,11 @@
                                     <input type="text"
                                         class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                         formControlName="locality">
+                                    <div>
+                                        <p class="text-red-600"
+                                            *ngIf="dataVerify && myfc['locality']?.hasError('required')">Locality is
+                                            required</p>
+                                    </div>
                                 </div>
                                 <div
                                     class="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-4 py-3 px-3 shadow-md bg-slate-100 border border-blue-700 border-dotted">
@@ -92,18 +148,43 @@
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="name">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['name']?.hasError('required')">Name is
+                                                required</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['name']?.hasError('minlength')">Name should
+                                                have atleast 3 letters</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['name']?.hasError('maxlength')">Name can have
+                                                only 20 letters</p>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="font-bold" for="locality">Phone Number</label>
                                         <input type="text"
                                             class="border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-2 focus:outline-none mt-1"
                                             formControlName="mobile_no">
+                                        <div>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['mobile_no']?.hasError('required')">Mobile No.
+                                                is required</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['mobile_no']?.hasError('pattern')">Mobile No.
+                                                should be number</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['mobile_no']?.hasError('minlength')">Mobile
+                                                No. should have 10 numbers</p>
+                                            <p class="text-red-600"
+                                                *ngIf="dataVerify && myfc['mobile_no']?.hasError('maxlength')">Mobile
+                                                No. can have 10 numbers</p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="text-end py-3 mt-4">
                                     <button class="py-2 px-4 bg-blue-600 me-3 text-white rounded-lg"
-                                        (click)="addAddress()">Save
+                                        (click)="submitAdd()">Save
                                         Address</button>
                                     <button class="py-2 px-4 bg-slate-400 rounded-lg"
                                         (click)="addressHide()">Close</button>
@@ -114,17 +195,28 @@
 
                     <div class="p-5 grid gap-5 xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 mb-5">
                         <div *ngFor="let add of address">
-                            <div class="border border-slate-400 rounded-lg shadow-lg p-3 flex flex-col justify-between xl:h-[180px] lg:h-[180px] md:h-[180px] h-auto">
+                            <div class="border border-slate-400 rounded-lg shadow-lg p-3 flex flex-col justify-between xl:h-[200px] lg:h-[200px] md:h-[200px] h-auto cursor-pointer"
+                                (click)="selectedAddress(add)"
+                                [ngClass]="{'bg-blue-300' : selectedAddState && itemId === add._id}">
                                 <div>
-                                    #{{add.house_No}}, {{add.locality}}, {{add.street}}, {{add.city}}, {{add.district}},
+                                    #{{add.house_No}}, {{add.street}}, {{add.city}}, {{add.district}}, {{add.locality}},
                                     {{add.state}} - {{add.pincode}}
                                 </div>
                                 <div class="mt-4">
-                                    <i class="fa-solid fa-phone text-gray-700"></i>: {{add.mobile_no}}
+                                    <div class="mb-1">
+                                        <i class="fa-solid fa-user text-gray-700"></i>
+                                        {{add.name}}
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-phone text-gray-700"></i>
+                                        {{add.mobile_no}}
+                                    </div>
                                 </div>
                                 <div class="flex items-end gap-5 mt-3">
-                                    <button class="py-1 text-orange-600 font-bold">Edit</button>
-                                    <button class="py-1 text-orange-600 font-bold" (click)="deleteAddress(add)">Delete</button>
+                                    <button type="button" class="py-1 text-orange-600 font-bold"
+                                        (click)="editAdd(add)">Edit</button>
+                                    <button class="py-1 text-orange-600 font-bold"
+                                        (click)="deleteAddress(add)">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +224,7 @@
                 </div>
             </div>
 
-            <div class="border-b border-slate-300 shadow-md my-10">
+            <div class="border-b border-slate-300 shadow-md mt-10">
                 <h2 id="accordion-collapse-heading-1">
                     <button type="button" class="flex items-center justify-between w-full py-3 px-5"
                         (click)="toggleAccordion(2)">
@@ -156,7 +248,7 @@
                                 class="bg-gray-50 border border-gray-400 text-gray-900 text-sm focus:border-slate-500 block w-full p-4 focus:outline-none"
                                 required>
                             <div class="flex gap-3 mt-6 w-full">
-                                <div class="w-1/4 flex gap-3">
+                                <div class="xl:w-1/4 lg:w-1/4 w-1/2 flex gap-3">
                                     <input type="text" placeholder="MM" maxlength="2"
                                         class="bg-gray-50 border border-gray-400 text-gray-900 text-sm focus:border-slate-500 w-1/2 p-3 focus:outline-none"
                                         required>
@@ -165,16 +257,16 @@
                                         class="bg-gray-50 border border-gray-400 text-gray-900 text-sm focus:border-slate-500 w-1/2 p-3 focus:outline-none"
                                         required>
                                 </div>
-                                <div class="flex gap-4 w-1/3">
+                                <div class="flex gap-4 xl:w-1/3 lg:w-1/3 w-1/2">
                                     <input type="text" placeholder="CVV"
                                         class="bg-gray-50 border border-gray-400 text-gray-900 text-sm focus:border-slate-500 block p-3 focus:outline-none w-1/2"
                                         required>
                                 </div>
                             </div>
                         </div>
-                        <button
+                        <!-- <button
                             class="py-3 px-10 font-bold text-white rounded-sm bg-orange-500 border border-orange-500 mt-5 mx-7">PAY
-                            <i class="fa-solid fa-indian-rupee-sign ms-1"></i>{{billAmount}}</button>
+                            <i class="fa-solid fa-indian-rupee-sign ms-1"></i>{{billAmount}}</button> -->
                     </div>
 
                     <div class="px-5 py-5 border-b-2 border-slate-300 cursor-pointer"
@@ -184,17 +276,17 @@
                         </div>
                         <div class="px-7">
                             <div class="flex items-center mb-2">
-                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="gpay" class="me-2">
                                 <img src="assets/images/gpay.png" width="30px" class="me-1">
                                 <div>Google Pay UPI</div>
                             </div>
                             <div class="flex mb-2">
-                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="phonepay" class="me-2">
                                 <img src="assets/images/PhonePe.png" width="30px" class="me-1">
                                 <div>Phone Pay UPI</div>
                             </div>
                             <div class="flex mb-2">
-                                <input (change)="upiMethod($event)" type="radio" name="upi" id="upi" class="me-2">
+                                <input (change)="upiMethod($event)" type="radio" name="upi" id="paytm" class="me-2">
                                 <img src="assets/images/Paytm.png" width="30px" class="me-1">
                                 <div>Paytm UPI</div>
                             </div>
@@ -211,10 +303,16 @@
                     </div>
                 </div>
             </div>
+
+            <div *ngIf="activeBgColor !== '' && selectedAddState" class="flex xl:justify-end lg:justify-end justify-center">
+                <button
+                    class="py-3 px-10 xl:my-5 lg:my-5 md::my-5 mt-10 font-bold text-white rounded-sm bg-orange-500 border border-orange-500" (click)="addOrderData()">Confirm
+                    Your Order</button>
+            </div>
         </div>
     </div>
-    <div class="xl:col-span-1 mt-4 xl:fixed xl:right-5 xl:w-[420px]">
-        <div class="border border-slate-200 shadow-md py-5 px-6 mx-5 my-6">
+    <div class="xl:col-span-1 xl:mt-10 lg:mt-4 xl:fixed xl:right-5 w-auto mt-0">
+        <div class="border border-slate-200 shadow-md lg:py-5 md:py-5 py-0 px-6 mx-5">
             <h3 class="text-lg text-slate-600 font-bold text-center border-b-2 border-slate-400">Bill Summary</h3>
             <div *ngFor="let qty of itemsArray; let i = index">
                 <div class="my-3 flex justify-between ">

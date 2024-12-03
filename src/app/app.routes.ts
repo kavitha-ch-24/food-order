@@ -10,6 +10,7 @@ import { AuthGuardService } from './_services/auth-guard.service';
 import { UpdateItemComponent } from './components/food/update-item/update-item.component';
 import { CartComponent } from './components/food/cart/cart.component';
 import { PaymentComponent } from './components/food/payment/payment.component';
+import { OrderListComponent } from './components/order/order-list/order-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,6 +28,7 @@ export const routes: Routes = [
       { path: 'food/edit/:id', component: UpdateItemComponent },
       { path: 'food/cart', component: CartComponent },
       { path: 'food/payment', component: PaymentComponent },
+      { path: 'order/list', component: OrderListComponent },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

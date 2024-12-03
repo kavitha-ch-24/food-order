@@ -39,7 +39,7 @@ export class ItemsListComponent {
   getItemList() {
     this.foodServ.getFoodItemsList().subscribe({
       next: (res: any) => {
-        console.log(res);
+        // console.log(res);
         this.spinner = false;
         this.foodLists = res.data;
         this.filteredFoodLists = this.foodLists;
@@ -87,7 +87,7 @@ export class ItemsListComponent {
       // console.log('Item added to cart:', data._id);
       this.foodServ.addToCart(itemData).subscribe({
         next: (res: any) => {
-          console.log(res);
+          // console.log(res);
           this.cartCountCheck();
         }, error: (err: any) => {
           console.log(err);
@@ -99,7 +99,7 @@ export class ItemsListComponent {
         }
       })
     } else {
-      console.log('Item not found in filtered list');
+      // console.log('Item not found in filtered list');
       this.msgServ.add({ severity: 'warn', summary: 'Item Not Found', detail: 'Item is not available in the current filtered list' });
     }
   }
@@ -108,9 +108,9 @@ export class ItemsListComponent {
     let userId = this.userData?.id;
     this.foodServ.cartCountCheck(userId).subscribe({
       next: (res: any) => {
-        console.log(res, "cart count");
+        // console.log(res, "cart count");
         this.quantityArray = res.data;
-        console.log(this.quantityArray);
+        // console.log(this.quantityArray);
         if (this.quantityArray.length > 0) {
           let totalQuantity = 0;
           this.quantityArray.forEach((item: any) => {

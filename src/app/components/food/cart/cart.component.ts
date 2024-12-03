@@ -33,16 +33,16 @@ export class CartComponent {
     let userId = this.userData?.id;
     this.foodServ.cartCountCheck(userId).subscribe({
       next: (res: any) => {
-        console.log(res, "cart count");
+        // console.log(res, "cart count");
         this.spinner = false;
         this.itemsArray = res.data;
-        console.log(this.itemsArray,"itemArray");
+        // console.log(this.itemsArray,"itemArray");
         if (this.itemsArray.length > 0) {
           let totalQuantity = 0;
           let sum=0;
           this.itemsArray.forEach((item: any) => {
             sum=sum+(item.quantity*item.itemPrice)
-            console.log(sum,"this.totalPrice")
+            // console.log(sum,"this.totalPrice")
             totalQuantity += item.quantity;
           });
           this.totalPrice=sum;

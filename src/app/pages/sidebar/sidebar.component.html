@@ -43,15 +43,31 @@
         <li class="py-0.5">
             <a class="flex items-center justify-between py-2 px-6" [ngClass]="{'text-blue-700': activeMenu === 3}"
                 (click)="setActiveMenu(3)">
-                My Profile
+                Order History
                 <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 3}">
                     &#9660;
                 </span>
             </a>
             <ul class="pl-6" *ngIf="activeMenu === 3">
                 <li (click)="toggleSidebar()">
+                    <a routerLink="/order/list" class="block py-2 px-4"
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 7}" (click)="setActiveSubmenu(7)">Orders List</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="py-0.5">
+            <a class="flex items-center justify-between py-2 px-6" [ngClass]="{'text-blue-700': activeMenu === 4}"
+                (click)="setActiveMenu(4)">
+                My Profile
+                <span class="ml-auto transition-transform duration-300" [ngClass]="{'rotate-90': activeMenu === 4}">
+                    &#9660;
+                </span>
+            </a>
+            <ul class="pl-6" *ngIf="activeMenu === 4">
+                <li (click)="toggleSidebar()">
                     <a routerLink="/user/desc" class="block py-2 px-4"
-                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 7}" (click)="setActiveSubmenu(7)">My
+                        [ngClass]="{'bg-gray-700 text-white': activeSubmenu === 7}" (click)="setActiveSubmenu(8)">My
                         Profile</a>
                 </li>
             </ul>

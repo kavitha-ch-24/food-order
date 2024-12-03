@@ -38,12 +38,15 @@ export class FoodService {
   }
 
   addToCart(data: any): Observable<any> {
-    console.log(data, "api data");
     return this.http.post(this.apiUrl + '/cart/addCart', data);
   }
 
   cartCountCheck(id: any): Observable<any> {
     return this.http.get(this.apiUrl + `/cart/cartDetails/${id}`);
+  }
+
+  deleteAllCart(id: any): Observable<any> {
+    return this.http.delete(this.apiUrl + `/cart/deleteAllCart/${id}`);
   }
 
   getDeliveryAddress(id: any): Observable<any> {
@@ -54,7 +57,11 @@ export class FoodService {
     return this.http.post(this.apiUrl + '/delivery/addDeliveryAddress', data);
   }
 
-  deleteDeliveryAddress(id:any):Observable<any>{
+  deleteDeliveryAddress(id: any): Observable<any> {
     return this.http.delete(this.apiUrl + `/delivery/deleteDeliveryAddress/${id}`);
+  }
+
+  editDeliveryAddress(data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/delivery/editDeliveryAddress', data);
   }
 }
