@@ -5,6 +5,7 @@ import { FoodService } from '../../../_services/food.service';
 import { ToastModule } from 'primeng/toast';
 import { PrimeNGConfig, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
+import { HotelService } from '../../../_services/hotel.service';
 
 @Component({
   selector: 'app-items-list',
@@ -27,22 +28,32 @@ export class ItemsListComponent {
   itemId: any;
   quantityArray: any[] = [];
   desc: boolean = false;
+  hotelId: any;
+  noData: boolean = false;
 
-  constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService) { }
+  constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService, private hotelServ: HotelService) { }
 
   ngOnInit(): void {
-    this.getItemList();
     this.userData = this.dataServ.getUserInfo()?.data;
     this.cartCountCheck();
+
+    this.ar.url.subscribe((params) => {
+      console.log(params[2]);
+      this.hotelId = params[2].path;
+    })
+    this.getItemList();
   }
 
   getItemList() {
-    this.foodServ.getFoodItemsList().subscribe({
+    this.hotelServ.getItemsByHotelId(this.hotelId).subscribe({
       next: (res: any) => {
         // console.log(res);
         this.spinner = false;
         this.foodLists = res.data;
         this.filteredFoodLists = this.foodLists;
+        if (this.filteredFoodLists.length === 0) {
+          this.noData = true;
+        }
       }, error: (err: any) => {
         console.log(err);
         if (err.status === 404) {
@@ -79,7 +90,8 @@ export class ItemsListComponent {
       itemType: data.food_type,
       quantity: 1,
       itemName: data.itemName,
-      type: cartState ? cartState : 'add'
+      type: cartState ? cartState : 'add',
+      hotel_id: this.hotelId
     }
 
     if (itemInCart) {

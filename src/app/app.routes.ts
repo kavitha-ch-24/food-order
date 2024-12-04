@@ -11,6 +11,7 @@ import { UpdateItemComponent } from './components/food/update-item/update-item.c
 import { CartComponent } from './components/food/cart/cart.component';
 import { PaymentComponent } from './components/food/payment/payment.component';
 import { OrderListComponent } from './components/order/order-list/order-list.component';
+import { HotelListComponent } from './components/hotel/hotel-list/hotel-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,12 +24,13 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'user/list', component: UserListComponent },
       { path: 'user/desc', component: UserDescComponent },
-      { path: 'food/list', component: ItemsListComponent },
+      { path: 'food/list/:id', component: ItemsListComponent },
       { path: 'food/create', component: CreateItemComponent },
       { path: 'food/edit/:id', component: UpdateItemComponent },
       { path: 'food/cart', component: CartComponent },
       { path: 'food/payment', component: PaymentComponent },
       { path: 'order/list', component: OrderListComponent },
+      { path: 'hotel/hotel-list', component: HotelListComponent },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

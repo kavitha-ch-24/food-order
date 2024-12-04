@@ -1,7 +1,7 @@
-<div class="grid xl:grid-cols-3 grid-cols-1 gap-5 relative">
+<div class="grid xl:grid-cols-3 grid-cols-1 gap-5 relative lg:mx-10 md:mx-10 ms-0">
     <div *ngIf="addressCard" class="fixed inset-0 bg-opacity-60 backdrop-blur-md bg-slate-300 z-10"
         (click)="addressHide()"></div>
-    <div class="xl:col-span-2">
+    <div class="xl:col-span-2 mt-12">
         <div *ngIf="userData" class="py-3 px-5 border border-slate-200 shadow-lg mt-10 flex items-center">
             <div>
                 <div class="text-md text-slate-600 text-lg font-bold">1. Contact Info</div>
@@ -311,7 +311,7 @@
             </div>
         </div>
     </div>
-    <div class="xl:col-span-1 xl:mt-10 lg:mt-4 xl:fixed xl:right-5 w-auto mt-0">
+    <div class="xl:col-span-1 xl:mt-24 lg:mt-0 xl:fixed xl:right-5 w-auto mt-0">
         <div class="border border-slate-200 shadow-md lg:py-5 md:py-5 py-0 px-6 mx-5">
             <h3 class="text-lg text-slate-600 font-bold text-center border-b-2 border-slate-400">Bill Summary</h3>
             <div *ngFor="let qty of itemsArray; let i = index">

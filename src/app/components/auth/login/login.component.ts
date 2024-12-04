@@ -44,7 +44,7 @@ export class LoginComponent {
             this.authServ.login();
             this.dataServ.getCartCount(); 
             setTimeout(() => {
-              this.router.navigate(['/food/list']);
+              this.router.navigate(['/hotel/hotel-list']);
             }, 2000);
           } else {
             this.messageService.add({ severity: 'error', summary: 'Please try again later', detail: res.msg });
