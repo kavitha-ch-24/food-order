@@ -3,45 +3,39 @@
     <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
 </div>
 
-
-<div
-    class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border my-8">
-    <table class="w-full text-left table-auto min-w-max">
-        <thead>
-            <tr>
-                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p
-                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                        Name
-                    </p>
-                </th>
-                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p
-                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                        Job
-                    </p>
-                </th>
-                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p
-                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                        Employed
-                    </p>
-                </th>
-                <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p
-                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    </p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of orders; let i = index" class="m-10 ">
-                <td>
-                    <span class="flex items-center m-3">{{order?.items[i]?.street}}</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="mt-24">
+    <h3 class="text-xl font-bold text-center border-b border-slate-900 w-96 mx-auto mb-5">Orders</h3>
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1">
+        <div class="py-3 px-4 mb-5 mx-5 w-auto border shadow-md" *ngFor="let order of orders; let i = index;">
+            <div class="flex justify-between items-center py-1 text-slate-900">
+                <div class="font-bold text-lg">Hotel Name</div>
+                <div class="text-sm font-semibold">#{{order._id | uppercase}}</div>
+            </div>
+            <div class="text-md font-semibold text-amber-950 py-1 border-b border-dotted border-slate-500">Location
+            </div>
+            <div class="grid grid-cols-1 gap-4 mt-3">
+                <div *ngFor="let item of order.itemDetails; let i = index">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <span><i [ngClass]="order.itemDetails[i].food_type === 'veg' ? 'fa-regular fa-circle-stop text-green-600' : 'fa-regular fa-square-caret-up text-red-600'" aria-hidden="true"></i> {{item.itemName}}</span> <i
+                                class="fa-solid fa-xmark px-1"></i>                              
+                            <span>{{order.items[i]?.itemQuantity || 0}}</span>
+                        </div>
+                        <div class="ms-20">
+                            <i class="fa-solid fa-indian-rupee-sign me-1"></i><span>{{order.items[i]?.itemQuantity *
+                                item.price}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 border-t border-black pt-2">
+                    <div class="font-bold text-md">Order Total: </div>
+                    <div class="ms-20">
+                        <i class="fa-solid fa-indian-rupee-sign me-1"></i><span>{{order.order_amount}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <p-toast></p-toast>

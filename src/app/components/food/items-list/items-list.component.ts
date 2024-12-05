@@ -30,6 +30,7 @@ export class ItemsListComponent {
   desc: boolean = false;
   hotelId: any;
   noData: boolean = false;
+  hotelName: string = '';
 
   constructor(private ar: ActivatedRoute, private dataServ: DataServiceService, private foodServ: FoodService, private primeCon: PrimeNGConfig, private msgServ: MessageService, private hotelServ: HotelService) { }
 
