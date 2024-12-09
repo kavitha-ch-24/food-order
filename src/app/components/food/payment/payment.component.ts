@@ -268,7 +268,7 @@ export class PaymentComponent {
             this.msgServ.add({ severity: 'success', summary: 'Order Successful', detail: res.message });
             this.dataServ.resetCartCount();
             setTimeout(() => {
-              this.router.navigate(['/food/list']);
+              this.router.navigate(['/hotel/hotel-list']);
             }, 2000);
           }
         }, error: (err: any) => {

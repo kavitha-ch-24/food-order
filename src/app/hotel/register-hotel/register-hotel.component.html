@@ -1,0 +1,173 @@
+<div *ngIf="spinner" class="relative flex justify-center items-center h-96">
+    <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+    <img src="/assets/images/logo.png" class="rounded-full h-28 w-28">
+</div>
+
+<div class="flex items-center justify-center">
+    <form [formGroup]="hotelRegisterForm" (ngSubmit)="createHotel()">
+        <div class="w-full bg-white rounded-lg shadow border">
+            <div class="space-y-4 md:space-y-6 sm:p-8">
+                <p class="text-xl text-center pb-3 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                    Register Your Hotel
+                </p>
+                <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+                    <div>
+                        <label for="hotel_name" class="block mb-2 text-sm font-medium text-gray-900">
+                            Hotel Name <span class="error">*</span>
+                        </label>
+                        <input placeholder="Hotel Name"
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            id="hotel_name" type="text" formControlName="hotel_name">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_name')?.hasError('required')">Hotel
+                            Name is
+                            required</div>
+                    </div>
+                    <div>
+                        <label for="hotel_email" class="block mb-2 text-sm font-medium text-gray-900">
+                            Hotel Email Address <span class="error">*</span>
+                        </label>
+                        <input placeholder="Hotel Email Address"
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            id="hotel_email" type="text" formControlName="hotel_email">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_email')?.hasError('required')">
+                            Email is required
+                        </div>
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_email')?.hasError('email')">
+                            Enter Valid Email
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
+                            Password <span class="error">*</span>
+                        </label>
+                        <input
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            placeholder="••••••••" id="password" type="password" formControlName="password">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('password')?.hasError('required')">
+                            Password is required</div>
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('password')?.hasError('minlength')">Password
+                            should have atleast 8 characters</div>
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('password')?.hasError('maxlength')">Password can
+                            have only 16 characters</div>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block mb-2 text-sm font-medium text-gray-900">
+                            Confirm password <span class="error">*</span>
+                        </label>
+                        <input
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            placeholder="••••••••" id="confirmPassword" type="password" [(ngModel)]="confirmPassword"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+                    <div>
+                        <label for="hotel_category" class="block mb-2 text-sm font-medium text-gray-900 me-10">
+                            Hotel category <span class="error">*</span>
+                        </label>
+                        <select name="hotel_category" id="hotel_category"
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            formControlName="hotel_category">
+                            <option value="" hidden>Select Hotel Category</option>
+                            <option value="Nati Style">Nati Style</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Dhabha">Dhabha</option>
+                        </select>
+                        <div class="error" *ngIf="dataVerify && hotelRegisterForm.get('gender')?.hasError('required')">
+                            Select Gender</div>
+                    </div>
+                    <div>
+                        <label for="hotel_street" class="block mb-2 text-sm font-medium text-gray-900">
+                            Hotel Street <span class="error">*</span>
+                        </label>
+                        <input
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            id="hotel_street" type="text" formControlName="hotel_street">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_street')?.hasError('required')">
+                            Date of Birth is required</div>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+                    <div>
+                        <label for="hotel_area" class="block mb-2 text-sm font-medium text-gray-900 me-10">
+                            Hotel Area <span class="error">*</span>
+                        </label>
+                        <input id="hotel_area" type="text"
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            placeholder="Enter Hotel Area" formControlName="hotel_area">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_area')?.hasError('required')">
+                            Age is required</div>
+                    </div>
+                    <div>
+                        <label for="hotel_locality" class="block mb-2 text-sm font-medium text-gray-900">
+                            Locality <span class="error">*</span>
+                        </label>
+                        <input
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            id="hotel_locality" type="text" formControlName="hotel_locality">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_locality')?.hasError('required')">
+                            Phone number is required</div>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-5 md:grid-cols-1 sm:grid-cols-1 xs:grid-cols-1">
+                    <div>
+                        <label for="hotel_city" class="block mb-2 text-sm font-medium text-gray-900 me-10">
+                            Hotel City <span class="error">*</span>
+                        </label>
+                        <input type="text" id="hotel_city"
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            placeholder="Enter Hotel City" formControlName="hotel_city">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_city')?.hasError('hotel_city')">
+                            Hotel City is required</div>
+                    </div>
+                    <div>
+                        <label for="hotel_pincode" class="block mb-2 text-sm font-medium text-gray-900">
+                            Hotel Pincode <span class="error">*</span>
+                        </label>
+                        <input
+                            class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                            id="hotel_pincode" type="text" formControlName="hotel_pincode">
+                        <div class="error"
+                            *ngIf="dataVerify && hotelRegisterForm.get('hotel_pincode')?.hasError('required')">
+                            Phone number is required</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <form class="max-w-lg mx-auto">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            for="user_avatar">Upload file</label>
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                    </form>
+                </div>
+            </div>
+            <div class="text-center">
+                <button
+                    class="bg-black hover:bg-slate-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:none text-white"
+                    type="submit">
+                    Create a hotel account
+                </button>
+                <p class="text-center text-sm text-gray-500 my-5">Already have an hotel account?
+                    <a routerLink="/"
+                        class="cursor-pointer font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Login
+                    </a>.
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+<p-toast></p-toast>

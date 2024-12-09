@@ -9,7 +9,7 @@
         <div class="flex items-center text-xl font-bold text-black">
             {{foodLists[0]?.hotel_name}}
         </div>
-        <ul class="flex flex-wrap cursor-pointer pe-12">
+        <ul class="flex flex-wrap cursor-pointer xl:pe-12 lg:pe-12 md:pe-12 pe-0">
             <li class="xl:me-2 lg:me-2 md:me-2" (click)="foodTabList(null)">
                 <a [ngClass]="{'active dark:text-blue-500': selectedTab == null}"
                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">All</a>

@@ -12,11 +12,13 @@ import { CartComponent } from './components/food/cart/cart.component';
 import { PaymentComponent } from './components/food/payment/payment.component';
 import { OrderListComponent } from './components/order/order-list/order-list.component';
 import { HotelListComponent } from './components/hotel/hotel-list/hotel-list.component';
+import { RegisterHotelComponent } from './hotel/register-hotel/register-hotel.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent }, 
-  { path: 'user/register', component: RegisterUserComponent }, 
+  { path: 'login', component: LoginComponent },
+  { path: 'user/register', component: RegisterUserComponent },
+  { path: 'hotel/register', component: RegisterHotelComponent },
   {
     path: '',
     canActivate: [AuthGuardService],
