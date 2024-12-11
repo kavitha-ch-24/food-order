@@ -23,7 +23,9 @@ export class FoodService {
     apiData.append('price', data.price);
     apiData.append('food_type', data.food_type);
     apiData.append('category', data.category);
-    apiData.append('created_by', data.created_by);
+    apiData.append('hotel_email', data.hotel_email);
+    apiData.append('hotel_name', data.hotel_name);
+    apiData.append('hotel_id', data.hotel_id);
     return this.http.post(this.apiUrl + '/item/addItem', apiData);
   }
 

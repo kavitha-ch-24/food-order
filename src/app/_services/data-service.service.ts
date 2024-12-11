@@ -10,10 +10,14 @@ import { FoodService } from './food.service';
 export class DataServiceService {
 
   userInfo: any;
+  hotelInfo:any;
   private cartItems: any[] = [];
 
   private userDataSubject = new BehaviorSubject<any>(null);
   userData$ = this.userDataSubject.asObservable();
+
+  private hotelDataSubject = new BehaviorSubject<any>(null);
+  hotelData$ = this.userDataSubject.asObservable();
 
   constructor(private authServ: AuthService, private router: Router, private foodServ: FoodService) { }
 
@@ -47,6 +51,24 @@ export class DataServiceService {
     if (typeof window !== 'undefined' && typeof localStorage !== undefined) {
       localStorage?.setItem("userData", JSON.stringify(userData));
       this.userDataSubject.next(userData);
+    }
+  }
+
+  getHotelInfo() {
+    if (typeof window !== 'undefined' && typeof localStorage !== undefined) {
+      let hotelData = localStorage?.getItem("hotelData");
+      if (hotelData) {
+        this.hotelInfo = JSON.parse(hotelData);
+        this.hotelDataSubject.next(this.hotelInfo);
+        return this.hotelInfo;
+      }
+    }
+  }
+
+  setHotelInfo(hotelData: any) {
+    if (typeof window !== 'undefined' && typeof localStorage !== undefined) {
+      localStorage?.setItem("hotelData", JSON.stringify(hotelData));
+      this.hotelDataSubject.next(hotelData);
     }
   }
 

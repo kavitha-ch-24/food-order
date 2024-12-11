@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private router: Router, private dataServ: DataServiceService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        let sideMenu = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/user/register' || event.urlAfterRedirects === '/hotel/register');
+        let sideMenu = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/user/register' || event.urlAfterRedirects === '/hotel/register' || event.urlAfterRedirects === '/hotel/login');
         this.showMenu = !sideMenu;
         // console.log(this.showMenu);
       }

@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataServiceService } from '../../../_services/data-service.service';
@@ -10,16 +11,17 @@ import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-create-item',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ToastModule],
+  imports: [ToastModule, CommonModule, ReactiveFormsModule],
   templateUrl: './create-item.component.html',
   styleUrl: './create-item.component.css',
-  providers: [MessageService]
+  providers:[MessageService]
 })
+
 export class CreateItemComponent {
   itemClick: boolean = false;
   itemCreateForm: FormGroup;
   dataVerify: boolean = false;
-  userData: any;
+  hotelData: any;
   imgFile: any;
   spinner:boolean = false;
 
@@ -31,14 +33,17 @@ export class CreateItemComponent {
       image_url: new FormControl(null, Validators.required),
       food_type: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
-      created_by: new FormControl('', Validators.required),
+      hotel_name: new FormControl('', Validators.required),
+      hotel_email: new FormControl('', Validators.required),
+      hotel_id: new FormControl('', Validators.required),
     })
   }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.ar.url.subscribe((params) => { })
-    this.userData = this.dataServ.getUserInfo()?.data;
+    this.hotelData = this.dataServ.getHotelInfo()?.data;
+    console.log(this.hotelData, "hotelData");
   }
 
   fileUpload(e: any): void {
@@ -53,7 +58,9 @@ export class CreateItemComponent {
 
   createItem() {
     this.dataVerify = true;
-    this.itemCreateForm.controls['created_by'].setValue(this.userData.name);
+    this.itemCreateForm.controls['hotel_name'].setValue(this.hotelData.name);
+    this.itemCreateForm.controls['hotel_email'].setValue(this.hotelData.email);
+    this.itemCreateForm.controls['hotel_id'].setValue(this.hotelData.id);
     if (this.itemCreateForm.valid) {
       console.log(this.itemCreateForm.value);
       this.foodServ.createItem(this.itemCreateForm.value).subscribe({
@@ -63,9 +70,9 @@ export class CreateItemComponent {
           if (res.status === 200) {
             this.messageService.add({ severity: 'success', summary: 'Item Created', detail: res.msg });
             this.spinner = false;
-            setTimeout(() => {
-              this.router.navigate(['/food/list']);
-            }, 5000);
+            // setTimeout(() => {
+            //   this.router.navigate(['/food/list']);
+            // }, 5000);
           } else {
             this.messageService.add({ severity: 'error', summary: 'Error', detail: res.msg });
           }
